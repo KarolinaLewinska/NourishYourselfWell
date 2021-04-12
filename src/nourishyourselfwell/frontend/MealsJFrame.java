@@ -1,5 +1,6 @@
 package nourishyourselfwell.frontend;
 
+import javax.swing.JComboBox;
 import nourishyourselfwell.backend.MealsDb;
 
 public class MealsJFrame extends javax.swing.JFrame {
@@ -7,6 +8,7 @@ public class MealsJFrame extends javax.swing.JFrame {
     public MealsJFrame() {
         initComponents();
         mdb = new MealsDb(mealsTA);
+      
     }
 
     @SuppressWarnings("unchecked")
@@ -81,6 +83,11 @@ public class MealsJFrame extends javax.swing.JFrame {
 
         addMealB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         addMealB.setText("Dodaj ");
+        addMealB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMealBActionPerformed(evt);
+            }
+        });
 
         deleteMealB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         deleteMealB.setText("Usuń posiłek");
@@ -134,12 +141,11 @@ public class MealsJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(mealHourTF)
@@ -225,12 +231,16 @@ public class MealsJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mealComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealComboBoxActionPerformed
-        
+       
     }//GEN-LAST:event_mealComboBoxActionPerformed
 
     private void showMealsBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMealsBActionPerformed
         mdb.showMeals(mealsSearchTF.getText());
     }//GEN-LAST:event_showMealsBActionPerformed
+
+    private void addMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMealBActionPerformed
+        mdb.addMeal(mealDateTF.getText(), (String)mealComboBox.getSelectedItem(), mealNameTA.getText(), mealHourTF.getText(), caloriesTF.getText());
+    }//GEN-LAST:event_addMealBActionPerformed
 
     public static void main(String args[]) {
         try {

@@ -27,11 +27,11 @@ public class ActivityJFrame extends javax.swing.JFrame {
         editActivityB = new javax.swing.JButton();
         deleteActivityB = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        activityTypeTA = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        activityHourTF = new javax.swing.JFormattedTextField();
+        startTimeTF = new javax.swing.JFormattedTextField();
         activitySearchTF = new javax.swing.JTextField();
         activityDateTF = new javax.swing.JTextField();
         showActivitiesB = new javax.swing.JButton();
@@ -81,6 +81,11 @@ public class ActivityJFrame extends javax.swing.JFrame {
 
         addActivityB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         addActivityB.setText("Dodaj  ");
+        addActivityB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActivityBActionPerformed(evt);
+            }
+        });
 
         editActivityB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         editActivityB.setText("Edytuj");
@@ -88,11 +93,11 @@ public class ActivityJFrame extends javax.swing.JFrame {
         deleteActivityB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         deleteActivityB.setText("Usuń aktywność");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        activityTypeTA.setColumns(20);
+        activityTypeTA.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        activityTypeTA.setLineWrap(true);
+        activityTypeTA.setRows(5);
+        jScrollPane2.setViewportView(activityTypeTA);
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(199, 151, 29));
@@ -107,9 +112,9 @@ public class ActivityJFrame extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Wpisz datę");
 
-        activityHourTF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        activityHourTF.setText("12:00");
-        activityHourTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        startTimeTF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        startTimeTF.setText("12:00");
+        startTimeTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
 
         activitySearchTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         activitySearchTF.setText("rrrr-mm-dd");
@@ -151,7 +156,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addComponent(activityHourTF, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(startTimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -203,7 +208,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addGap(15, 15, 15)
-                        .addComponent(activityHourTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(startTimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -238,6 +243,10 @@ public class ActivityJFrame extends javax.swing.JFrame {
         adb.showActivities(activitySearchTF.getText());
     }//GEN-LAST:event_showActivitiesBActionPerformed
 
+    private void addActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActivityBActionPerformed
+        adb.addActivity(activityDateTF.getText(), activityTypeTA.getText(), startTimeTF.getText(), durationTF.getText(), caloriesTF.getText());
+    }//GEN-LAST:event_addActivityBActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -266,8 +275,8 @@ public class ActivityJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea activitiesTA;
     private javax.swing.JTextField activityDateTF;
-    private javax.swing.JFormattedTextField activityHourTF;
     private javax.swing.JTextField activitySearchTF;
+    private javax.swing.JTextArea activityTypeTA;
     private javax.swing.JButton addActivityB;
     private javax.swing.JTextField caloriesTF;
     private javax.swing.JButton deleteActivityB;
@@ -284,8 +293,8 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JButton showActivitiesB;
+    private javax.swing.JFormattedTextField startTimeTF;
     // End of variables declaration//GEN-END:variables
     private ActivityDb adb;
 }
