@@ -10,6 +10,7 @@ public class ActivityDb {
         this.activitiesTable = activitiesTable;
     }
     
+    
     public void showActivities(String activityDate) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -23,7 +24,7 @@ public class ActivityDb {
             
             if (!rs.isBeforeFirst()) {
                 JOptionPane.showMessageDialog(null, "Brak zapisanych aktywności z podaną datą!" 
-                    , "Brak posiłków", JOptionPane.INFORMATION_MESSAGE);
+                    , "Brak aktywności", JOptionPane.INFORMATION_MESSAGE);
             }
             while(activitiesTable.getRowCount() > 0) {
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
@@ -40,13 +41,16 @@ public class ActivityDb {
             }
             rs.close();
             conn.close();
-            activitiesTable.getColumnModel().getColumn(2)
+            activitiesTable.getColumnModel().getColumn(3)
                     .setCellRenderer(new WordWrapCellRenderer());
+            
+           
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Błąd " + e.getMessage(),
                     "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
     public void addActivity(String activityDate, String activityType, 
             String startTime, String duration, String calories) {
         try {
@@ -65,9 +69,37 @@ public class ActivityDb {
             conn.close();
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano aktywność fizyczną: " 
                     +activityType+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
+            
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu " 
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public void deleteActivity() {
+        DefaultTableModel tModel = (DefaultTableModel) activitiesTable.getModel();
+        int selectedRow = activitiesTable.getSelectedRow();
+        int idRow = (int) activitiesTable.getModel().getValueAt(selectedRow, 0);
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "Kropek1221"); 
+            CallableStatement cs = 
+                    conn.prepareCall("{call dbo.deleteActivity(?)}"); 
+            cs.setInt(1, idRow);
+            cs.execute();
+            conn.close();
+            JOptionPane.showMessageDialog(null, "Pomyślnie usunięto informacje o aktywności fizycznej " 
+                    , "Usuń", JOptionPane.INFORMATION_MESSAGE);
+            while(activitiesTable.getRowCount() > 0) {
+                ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
+            }
+        } catch(Exception exc) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu " 
+                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+        }
+                
+    }
 }
+

@@ -88,6 +88,11 @@ public class MealsJFrame extends javax.swing.JFrame {
 
         deleteMealB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         deleteMealB.setText("Usuń");
+        deleteMealB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMealBActionPerformed(evt);
+            }
+        });
 
         editMealB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         editMealB.setText("Edytuj");
@@ -125,22 +130,26 @@ public class MealsJFrame extends javax.swing.JFrame {
 
         mealsSearchTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         mealsSearchTF.setText("rrrr-mm-dd");
+        mealsSearchTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mealsSearchTFActionPerformed(evt);
+            }
+        });
 
         mealDateTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         mealDateTF.setText("rrrr-mm-dd");
 
-        mealsTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mealsTable.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         mealsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Data", "Rodzaj posiłku", "Nazwa posiłku", "Godzina", "Kaloryczność"
+                "Id", "Data", "Rodzaj", "Nazwa ", "Godzina", "Kaloryczność"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -148,7 +157,7 @@ public class MealsJFrame extends javax.swing.JFrame {
             }
         });
         mealsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        mealsTable.setSelectionBackground(new java.awt.Color(248, 199, 126));
+        mealsTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(mealsTable);
         if (mealsTable.getColumnModel().getColumnCount() > 0) {
             mealsTable.getColumnModel().getColumn(0).setResizable(false);
@@ -156,6 +165,7 @@ public class MealsJFrame extends javax.swing.JFrame {
             mealsTable.getColumnModel().getColumn(2).setResizable(false);
             mealsTable.getColumnModel().getColumn(3).setResizable(false);
             mealsTable.getColumnModel().getColumn(4).setResizable(false);
+            mealsTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,12 +205,16 @@ public class MealsJFrame extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(mealDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mealsSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(45, 45, 45))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mealsSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -234,10 +248,10 @@ public class MealsJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mealComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mealDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mealsSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mealDateTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mealsSearchTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mealComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -279,6 +293,14 @@ public class MealsJFrame extends javax.swing.JFrame {
         mdb.addMeal(mealDateTF.getText(), (String)mealComboBox.getSelectedItem(), 
                 mealNameTA.getText(), mealHourTF.getText(), caloriesTF.getText());
     }//GEN-LAST:event_addMealBActionPerformed
+
+    private void mealsSearchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealsSearchTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mealsSearchTFActionPerformed
+
+    private void deleteMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMealBActionPerformed
+        mdb.deleteMeal();
+    }//GEN-LAST:event_deleteMealBActionPerformed
     
    
     public static void main(String args[]) {
