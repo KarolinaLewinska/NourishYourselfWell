@@ -6,10 +6,9 @@ public class StatisticsJFrame extends javax.swing.JFrame {
 
     public StatisticsJFrame() {
         initComponents();
-        sdb = new StatisticsDb(mostCaloricTF);
+        //sdb = new StatisticsDb(mostCaloricTF);
     }
     
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,11 +100,11 @@ public class StatisticsJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostCaloricBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricBActionPerformed
-        sdb.mostCaloricMeal();
+        //sdb.mostCaloricMeal();
     }//GEN-LAST:event_mostCaloricBActionPerformed
 
     private void mostCaloricTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricTFActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_mostCaloricTFActionPerformed
     
     public static void main(String args[]) {

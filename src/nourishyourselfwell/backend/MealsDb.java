@@ -1,12 +1,13 @@
-
 package nourishyourselfwell.backend;
+
 import java.sql.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class MealsDb {
-    private JTextArea mealsTA; 
-    public MealsDb (JTextArea mealsTA) {
-        this.mealsTA = mealsTA;
+    private JTable mealsTable;
+    public MealsDb (JTable mealsTable) {
+        this.mealsTable = mealsTable;
     }
     
     public void showMeals(String mealDate) {
@@ -15,22 +16,35 @@ public class MealsDb {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "Kropek1221"); 
-            PreparedStatement ps = conn.prepareStatement("{call dbo.displayMeals(?)}");
+            PreparedStatement ps = 
+                    conn.prepareStatement("{call dbo.displayMeals(?)}");
             ps.setString(1, mealDate);
             ResultSet rs = ps.executeQuery();
-           while(rs.next()) {
-               mealsTA.append(rs.getDate("mealDate")+ " | " 
-                       +rs.getString("mealType")+ " | "
-                       +rs.getString("mealName") + " | " + rs.getString("mealHour")+ " | " + rs.getString("calories") +"\n"
-               );
-           }
+            while(mealsTable.getRowCount() > 0) {
+                ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
+            }
+            int columns = rs.getMetaData().getColumnCount();
+            while(rs.next()) {  
+                Object[] row = new Object[columns];
+                for (int i = 1; i <= columns; i++)
+                {  
+                    row[i - 1] = rs.getObject(i);
+                }
+                ((DefaultTableModel) mealsTable
+                        .getModel()).insertRow(rs.getRow()-1,row);
+            }
+            rs.close();
             conn.close();
+            mealsTable.getColumnModel().getColumn(2)
+                    .setCellRenderer(new WordWrapCellRenderer());
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Błąd " + e.getMessage(),
                     "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void addMeal(String mealDate, String mealType, String mealName, String mealHour, String calories) {
+    
+    public void addMeal(String mealDate, String mealType, String mealName, 
+            String mealHour, String calories) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
@@ -38,7 +52,7 @@ public class MealsDb {
                     "nourishYourselfAdmin", "Kropek1221"); 
             CallableStatement cs = 
                     conn.prepareCall("{call dbo.addMeal(?,?,?,?,?)}"); 
-            //procedura stworzona w MSSM o nazwie dodajKlienta
+           
             cs.setString(1, mealDate);
             cs.setString(2, mealType);
             cs.setString(3, mealName);
@@ -46,11 +60,11 @@ public class MealsDb {
             cs.setString(5, calories);
             cs.execute();
             conn.close();
-            JOptionPane.showMessageDialog(null, "Pomyślnie dodano posiłek: " +mealName+ "." 
-            , "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Pomyślnie dodano posiłek: " 
+                    +mealName+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
         } catch(Exception exc) {
-            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu " + exc.getMessage(),
-                    "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu " 
+                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     } 
 }

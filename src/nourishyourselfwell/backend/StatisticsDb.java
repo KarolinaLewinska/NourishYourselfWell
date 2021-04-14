@@ -11,10 +11,11 @@ import javax.swing.JTextField;
 
 public class StatisticsDb {
     private JTextField mostCaloricTF;
+    
     public StatisticsDb (JTextField mostCaloricTF) {
         this.mostCaloricTF = mostCaloricTF;
     }
-    public void mostCaloricMeal() {
+    /*public void mostCaloricMeal() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
@@ -22,7 +23,7 @@ public class StatisticsDb {
                     "nourishYourselfAdmin", "Kropek1221"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.showMostCaloricMeal}");
             ResultSet rs = ps.executeQuery();
-            //mostCaloricTF.getText(rs.getString("maxCalories")); nie działa to całe
+            mostCaloricTF.setText(rs.getString("maxCalories"));
             
             conn.close();
           
@@ -30,5 +31,7 @@ public class StatisticsDb {
             JOptionPane.showMessageDialog(null, "Błąd " + e.getMessage(),
                     "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
-    }
+    } 
+    */
+    
 }
