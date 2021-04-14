@@ -21,7 +21,5 @@ public class WordWrapCellRenderer extends JTextArea implements TableCellRenderer
         }
         return this;
     }
-    
-
 }
     

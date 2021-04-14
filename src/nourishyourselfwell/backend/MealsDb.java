@@ -20,6 +20,10 @@ public class MealsDb {
                     conn.prepareStatement("{call dbo.displayMeals(?)}");
             ps.setString(1, mealDate);
             ResultSet rs = ps.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(null, "Brak zapisanych posiłków z podaną datą!" 
+                     , "Brak posiłków", JOptionPane.INFORMATION_MESSAGE);
+            }
             while(mealsTable.getRowCount() > 0) {
                 ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
             }

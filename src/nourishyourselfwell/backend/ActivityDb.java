@@ -20,7 +20,11 @@ public class ActivityDb {
                     conn.prepareStatement("{call dbo.displayActivities(?)}");
             ps.setString(1, activityDate);
             ResultSet rs = ps.executeQuery();
-            //muszę dodać komunikat jak nie ma w bazie wyników
+            
+            if (!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(null, "Brak zapisanych aktywności z podaną datą!" 
+                    , "Brak posiłków", JOptionPane.INFORMATION_MESSAGE);
+            }
             while(activitiesTable.getRowCount() > 0) {
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
             }
