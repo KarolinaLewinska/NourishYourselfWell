@@ -6,15 +6,15 @@ public class StartJFrame extends javax.swing.JFrame {
         initComponents();
         mf = new MealsJFrame(); 
         mf.setTitle("Dziennik posiłków");
-        mf.setSize(680,480);
+        mf.setSize(780,480);
         
         af = new ActivityJFrame();
         af.setTitle("Dziennik aktywności fizycznej!");
-        af.setSize(640,500);
+        af.setSize(780,480);
         
         sf = new StatisticsJFrame();
-        mf.setTitle("Statystyki");
-        mf.setSize(680,480);
+        sf.setTitle("Statystyki");
+        sf.setSize(680,480);
     }
     
     @SuppressWarnings("unchecked")
