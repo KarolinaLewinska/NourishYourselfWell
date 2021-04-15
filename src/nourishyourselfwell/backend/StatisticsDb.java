@@ -27,8 +27,8 @@ public class StatisticsDb {
             
             conn.close();
           
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Błąd " + e.getMessage(),
+        } catch(Exception exc) {
+            JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),
                     "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
     } 

@@ -1,6 +1,5 @@
 package nourishyourselfwell.main;
 
-import java.awt.Color;
 import nourishyourselfwell.frontend.StartJFrame;
 
 public class NourishYourselfWell {

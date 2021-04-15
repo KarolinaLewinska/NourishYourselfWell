@@ -1,8 +1,6 @@
 package nourishyourselfwell.frontend;
 
-
 import nourishyourselfwell.backend.ActivityDb;
-
 
 public class ActivityJFrame extends javax.swing.JFrame {
 

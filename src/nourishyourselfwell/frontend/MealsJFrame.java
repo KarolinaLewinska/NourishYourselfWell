@@ -9,7 +9,7 @@ public class MealsJFrame extends javax.swing.JFrame {
         mdb = new MealsDb(mealsTable);
       
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
