@@ -1,5 +1,7 @@
 package nourishyourselfwell.frontend;
 
+import java.util.ArrayList;
+import nourishyourselfwell.backend.Activity;
 import nourishyourselfwell.backend.ActivityDb;
 
 public class ActivityJFrame extends javax.swing.JFrame {
@@ -7,8 +9,18 @@ public class ActivityJFrame extends javax.swing.JFrame {
     public ActivityJFrame() {
         initComponents();
         adb = new ActivityDb(activitiesTable);
+        activities= adb.showActivitiesDate();
+        displayDate(datePosition);
     }
-    
+    private void displayDate(int datePosition) {
+        previousDate.setEnabled(true);
+        nextDate.setEnabled(true);
+        if (datePosition == 0) previousDate.setEnabled(false);
+        if (datePosition == (activities.size()-1)) nextDate.setEnabled(false);
+        Activity activity = (Activity)activities.get(datePosition);
+        activitySearchTF.setText(activity.getActivityDate().toString());
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,6 +47,8 @@ public class ActivityJFrame extends javax.swing.JFrame {
         showActivitiesB = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         activitiesTable = new javax.swing.JTable();
+        previousDate = new javax.swing.JButton();
+        nextDate = new javax.swing.JButton();
 
         setResizable(false);
 
@@ -118,6 +132,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
         startTimeTF.setText("12:00");
         startTimeTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
 
+        activitySearchTF.setEditable(false);
         activitySearchTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         activitySearchTF.setText("rrrr-mm-dd");
 
@@ -159,6 +174,20 @@ public class ActivityJFrame extends javax.swing.JFrame {
             activitiesTable.getColumnModel().getColumn(4).setResizable(false);
             activitiesTable.getColumnModel().getColumn(5).setResizable(false);
         }
+
+        previousDate.setText("<");
+        previousDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousDateActionPerformed(evt);
+            }
+        });
+
+        nextDate.setText(">");
+        nextDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextDateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,7 +237,12 @@ public class ActivityJFrame extends javax.swing.JFrame {
                                 .addComponent(editActivityB, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(deleteActivityB, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(activitySearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(activitySearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(previousDate, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nextDate, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
@@ -237,8 +271,10 @@ public class ActivityJFrame extends javax.swing.JFrame {
                     .addComponent(activityDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(activitySearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(startTimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(startTimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(previousDate)
+                        .addComponent(nextDate)))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -283,6 +319,14 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private void deleteActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActivityBActionPerformed
         adb.deleteActivity();
     }//GEN-LAST:event_deleteActivityBActionPerformed
+
+    private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed
+        displayDate(--datePosition);
+    }//GEN-LAST:event_previousDateActionPerformed
+
+    private void nextDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDateActionPerformed
+        displayDate(datePosition++);
+    }//GEN-LAST:event_nextDateActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -331,8 +375,12 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton nextDate;
+    private javax.swing.JButton previousDate;
     private javax.swing.JButton showActivitiesB;
     private javax.swing.JFormattedTextField startTimeTF;
     // End of variables declaration//GEN-END:variables
     private ActivityDb adb;
+    private ArrayList<Activity>activities;
+    private int datePosition;
 }

@@ -1,5 +1,7 @@
 package nourishyourselfwell.frontend;
 
+import java.util.ArrayList;
+import nourishyourselfwell.backend.Meal;
 import nourishyourselfwell.backend.MealsDb;
 
 public class MealsJFrame extends javax.swing.JFrame {
@@ -7,7 +9,17 @@ public class MealsJFrame extends javax.swing.JFrame {
     public MealsJFrame() {
         initComponents();
         mdb = new MealsDb(mealsTable);
+        meals = mdb.showMealsDate();
+        displayDate(datePosition);
       
+    }
+    private void displayDate(int datePosition) {
+        previousDate.setEnabled(true);
+        nextDate.setEnabled(true);
+        if (datePosition == 0) previousDate.setEnabled(false);
+        if (datePosition == (meals.size()-1)) nextDate.setEnabled(false);
+        Meal meal = (Meal)meals.get(datePosition);
+        mealsSearchTF.setText(meal.getMealDate().toString());
     }
     
     @SuppressWarnings("unchecked")
@@ -36,6 +48,8 @@ public class MealsJFrame extends javax.swing.JFrame {
         mealDateTF = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         mealsTable = new javax.swing.JTable();
+        previousDate = new javax.swing.JButton();
+        nextDate = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(900, 395));
@@ -128,6 +142,7 @@ public class MealsJFrame extends javax.swing.JFrame {
             }
         });
 
+        mealsSearchTF.setEditable(false);
         mealsSearchTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         mealsSearchTF.setText("rrrr-mm-dd");
         mealsSearchTF.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +182,20 @@ public class MealsJFrame extends javax.swing.JFrame {
             mealsTable.getColumnModel().getColumn(4).setResizable(false);
             mealsTable.getColumnModel().getColumn(5).setResizable(false);
         }
+
+        previousDate.setText("<");
+        previousDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousDateActionPerformed(evt);
+            }
+        });
+
+        nextDate.setText(">");
+        nextDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextDateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,7 +237,12 @@ public class MealsJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mealsSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(mealsSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(previousDate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(nextDate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45))
@@ -250,9 +284,12 @@ public class MealsJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mealDateTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mealsSearchTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(mealsSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(previousDate)
+                        .addComponent(nextDate))
                     .addComponent(mealComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -301,6 +338,14 @@ public class MealsJFrame extends javax.swing.JFrame {
     private void deleteMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMealBActionPerformed
         mdb.deleteMeal();
     }//GEN-LAST:event_deleteMealBActionPerformed
+
+    private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed
+        displayDate(--datePosition);
+    }//GEN-LAST:event_previousDateActionPerformed
+
+    private void nextDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDateActionPerformed
+        displayDate(++datePosition);
+    }//GEN-LAST:event_nextDateActionPerformed
     
    
     public static void main(String args[]) {
@@ -350,7 +395,11 @@ public class MealsJFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea mealNameTA;
     private javax.swing.JTextField mealsSearchTF;
     private javax.swing.JTable mealsTable;
+    private javax.swing.JButton nextDate;
+    private javax.swing.JButton previousDate;
     private javax.swing.JButton showMealsB;
     // End of variables declaration//GEN-END:variables
     private MealsDb mdb;
+    private ArrayList<Meal> meals;
+    private int datePosition;
 }

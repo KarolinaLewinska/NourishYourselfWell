@@ -1,6 +1,7 @@
 package nourishyourselfwell.backend;
 
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -51,6 +52,29 @@ public class ActivityDb {
             JOptionPane.showMessageDialog(null, "Błąd: " + exc.getMessage(),
                     "Wystąpił błąd podczas wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public ArrayList showActivitiesDate() {
+        ArrayList<Activity> activities = new ArrayList();
+        
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            
+            PreparedStatement ps = conn.prepareStatement("{call dbo.showActivitiesDate}");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                activities.add(new Activity(rs.getDate("activityDate")));
+            }
+            conn.close();
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat aktywności " 
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+        }
+        return activities;
     }
     
     public void addActivity(String activityDate, String activityType, 

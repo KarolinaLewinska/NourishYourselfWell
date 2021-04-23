@@ -107,10 +107,10 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel8.setText("Średnia wartość spożytych kalorii");
+        jLabel8.setText("Średnia liczba spożytych kalorii");
 
         jLabel9.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel9.setText("Średnia wartość spalonych kalorii ");
+        jLabel9.setText("Średnia liczba spalonych kalorii ");
 
         mostCaloricTF7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

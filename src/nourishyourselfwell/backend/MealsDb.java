@@ -1,6 +1,7 @@
 package nourishyourselfwell.backend;
 
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +52,29 @@ public class MealsDb {
             JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),
                     "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    public ArrayList showMealsDate() {
+        ArrayList<Meal> meals = new ArrayList();
+        
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            
+            PreparedStatement ps = conn.prepareStatement("{call dbo.showMealsDate}");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                meals.add(new Meal(rs.getDate("mealDate")));
+            }
+            conn.close();
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat spożytych posiłków " 
+                    + e.getMessage(),
+                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+        }
+        return meals;
     }
     
     public void addMeal(String mealDate, String mealType, String mealName, 
