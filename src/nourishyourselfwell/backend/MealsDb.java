@@ -12,7 +12,6 @@ public class MealsDb {
         this.mealsTable = mealsTable;
     }
     
-    
     public void showMeals(String mealDate) {
         try {
             ((DefaultTableCellRenderer)mealsTable.getDefaultRenderer(String.class))
@@ -46,7 +45,7 @@ public class MealsDb {
             }
             rs.close();
             conn.close();
-            mealsTable.getColumnModel().getColumn(3)
+            mealsTable.getColumnModel().getColumn(2)
                     .setCellRenderer(new WordWrapCellRenderer());
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),

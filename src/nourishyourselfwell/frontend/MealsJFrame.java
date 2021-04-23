@@ -124,7 +124,7 @@ public class MealsJFrame extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("Wpisz datę aktywności, którą chcesz wyszukać");
+        jLabel8.setText("Wpisz datę posiłków, którą chcesz wyszukać");
 
         jLabel9.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,27 +160,18 @@ public class MealsJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Data", "Rodzaj", "Nazwa ", "Godzina", "Kaloryczność"
+                "Id", "Rodzaj", "Nazwa ", "Godzina", "Kaloryczność"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         mealsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        mealsTable.setAutoscrolls(false);
+        mealsTable.setColumnSelectionAllowed(false);
         mealsTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(mealsTable);
         if (mealsTable.getColumnModel().getColumnCount() > 0) {
             mealsTable.getColumnModel().getColumn(0).setResizable(false);
-            mealsTable.getColumnModel().getColumn(1).setResizable(false);
-            mealsTable.getColumnModel().getColumn(2).setResizable(false);
             mealsTable.getColumnModel().getColumn(3).setResizable(false);
             mealsTable.getColumnModel().getColumn(4).setResizable(false);
-            mealsTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         previousDate.setText("<");
@@ -329,6 +320,8 @@ public class MealsJFrame extends javax.swing.JFrame {
     private void addMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMealBActionPerformed
         mdb.addMeal(mealDateTF.getText(), (String)mealComboBox.getSelectedItem(), 
                 mealNameTA.getText(), mealHourTF.getText(), caloriesTF.getText());
+        mealsSearchTF.setText(mealDateTF.getText());
+        mdb.showMeals(mealDateTF.getText());
     }//GEN-LAST:event_addMealBActionPerformed
 
     private void mealsSearchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealsSearchTFActionPerformed

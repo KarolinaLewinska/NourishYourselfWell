@@ -152,11 +152,11 @@ public class ActivityJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Data", "Rodzaj ", "Godzina ", "Czas ", "Kalorie"
+                "Id", "Rodzaj ", "Godzina ", "Czas ", "Kalorie"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -172,7 +172,6 @@ public class ActivityJFrame extends javax.swing.JFrame {
             activitiesTable.getColumnModel().getColumn(2).setResizable(false);
             activitiesTable.getColumnModel().getColumn(3).setResizable(false);
             activitiesTable.getColumnModel().getColumn(4).setResizable(false);
-            activitiesTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         previousDate.setText("<");

@@ -46,7 +46,7 @@ public class ActivityDb {
             }
             rs.close();
             conn.close();
-            activitiesTable.getColumnModel().getColumn(2)
+            activitiesTable.getColumnModel().getColumn(1)
                     .setCellRenderer(new WordWrapCellRenderer());
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd: " + exc.getMessage(),
