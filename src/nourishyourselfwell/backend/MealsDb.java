@@ -45,7 +45,7 @@ public class MealsDb {
             }
             rs.close();
             conn.close();
-            mealsTable.getColumnModel().getColumn(2)
+            mealsTable.getColumnModel().getColumn(3)
                     .setCellRenderer(new WordWrapCellRenderer());
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),
@@ -126,28 +126,40 @@ public class MealsDb {
     } 
     
     public void updateMeal() {
+        if (mealsTable.isEditing())
+            mealsTable.getCellEditor().stopCellEditing();
+        
         DefaultTableModel tModel = (DefaultTableModel) mealsTable.getModel();
         int selectedRow = mealsTable.getSelectedRow();
-        int idRow = (int) mealsTable.getModel().getValueAt(selectedRow, 0);
+        int mealIdRow = (int) mealsTable.getModel().getValueAt(selectedRow, 0);
+        String mealDateRow = mealsTable.getModel().getValueAt(selectedRow, 1).toString();
+        String mealTypeRow = mealsTable.getModel().getValueAt(selectedRow, 2).toString();
+        String mealNameRow = mealsTable.getModel().getValueAt(selectedRow, 3).toString();
+        String mealHourRow = mealsTable.getModel().getValueAt(selectedRow, 4).toString();
+        String mealCaloriesRow = mealsTable.getModel().getValueAt(selectedRow, 5).toString();
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            CallableStatement cs = 
-                    conn.prepareCall("{call dbo.deleteMeal(?)}"); 
-            cs.setInt(1, idRow);
+          
+           CallableStatement cs = 
+                    conn.prepareCall("{call dbo.updateMeal(?,?,?,?,?,?)}"); 
+            cs.setInt(1, mealIdRow);
+            cs.setString(2, mealDateRow);
+            cs.setString(3, mealTypeRow);
+            cs.setString(4, mealNameRow);
+            cs.setString(5, mealHourRow);
+            cs.setString(6, mealCaloriesRow);
             cs.execute();
             conn.close();
-            JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o posiłku" 
-                    , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
-            while(mealsTable.getRowCount() > 0) {
-                ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
-            }
+            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku " 
+                    , "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
-        }         
+        }
     } 
+
 }

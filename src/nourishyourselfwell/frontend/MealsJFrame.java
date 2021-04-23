@@ -110,6 +110,11 @@ public class MealsJFrame extends javax.swing.JFrame {
 
         editMealB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         editMealB.setText("Edytuj");
+        editMealB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMealBActionPerformed(evt);
+            }
+        });
 
         mealNameTA.setColumns(20);
         mealNameTA.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
@@ -124,7 +129,6 @@ public class MealsJFrame extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("Wpisz datę posiłków, którą chcesz wyszukać");
 
         jLabel9.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,9 +164,17 @@ public class MealsJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Rodzaj", "Nazwa ", "Godzina", "Kaloryczność"
+                "Id", "Data", "Rodzaj", "Nazwa ", "Godzina", "Kaloryczność"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         mealsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         mealsTable.setAutoscrolls(false);
         mealsTable.setColumnSelectionAllowed(false);
@@ -170,8 +182,11 @@ public class MealsJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(mealsTable);
         if (mealsTable.getColumnModel().getColumnCount() > 0) {
             mealsTable.getColumnModel().getColumn(0).setResizable(false);
+            mealsTable.getColumnModel().getColumn(1).setResizable(false);
+            mealsTable.getColumnModel().getColumn(2).setResizable(false);
             mealsTable.getColumnModel().getColumn(3).setResizable(false);
             mealsTable.getColumnModel().getColumn(4).setResizable(false);
+            mealsTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         previousDate.setText("<");
@@ -340,6 +355,11 @@ public class MealsJFrame extends javax.swing.JFrame {
     private void nextDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDateActionPerformed
         displayDate(++datePosition);
     }//GEN-LAST:event_nextDateActionPerformed
+
+    private void editMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMealBActionPerformed
+       mdb.updateMeal();
+        
+    }//GEN-LAST:event_editMealBActionPerformed
     
    
     public static void main(String args[]) {
