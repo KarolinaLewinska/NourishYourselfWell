@@ -100,6 +100,11 @@ public class ActivityJFrame extends javax.swing.JFrame {
 
         editActivityB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         editActivityB.setText("Edytuj");
+        editActivityB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editActivityBActionPerformed(evt);
+            }
+        });
 
         deleteActivityB.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         deleteActivityB.setText("Usuń");
@@ -290,12 +295,13 @@ public class ActivityJFrame extends javax.swing.JFrame {
                             .addComponent(caloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(deleteActivityB)
-                            .addComponent(editActivityB)
-                            .addComponent(showActivitiesB)
-                            .addComponent(addActivityB))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(deleteActivityB)
+                                .addComponent(showActivitiesB)
+                                .addComponent(addActivityB))
+                            .addComponent(editActivityB, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -328,6 +334,11 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private void nextDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDateActionPerformed
         displayDate(datePosition++);
     }//GEN-LAST:event_nextDateActionPerformed
+
+    private void editActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActivityBActionPerformed
+        adb.updateActivity();
+        adb.showActivitiesDate();
+    }//GEN-LAST:event_editActivityBActionPerformed
 
     public static void main(String args[]) {
         try {

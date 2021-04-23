@@ -27,7 +27,7 @@ public class MealsDb {
             ResultSet rs = ps.executeQuery();
             
             if (!rs.isBeforeFirst()) {
-                JOptionPane.showMessageDialog(null, "Dane o posiłku z podaną datą nie istnieją" 
+                JOptionPane.showMessageDialog(null, "Brak danych w bazie o podanej dacie" 
                      , "Brak danych", JOptionPane.INFORMATION_MESSAGE);
             }
             while(mealsTable.getRowCount() > 0) {
@@ -154,7 +154,7 @@ public class MealsDb {
             cs.setString(6, mealCaloriesRow);
             cs.execute();
             conn.close();
-            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku " 
+            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku: "+mealNameRow+""
                     , "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 

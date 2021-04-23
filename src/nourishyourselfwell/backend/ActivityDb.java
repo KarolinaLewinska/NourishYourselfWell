@@ -127,5 +127,41 @@ public class ActivityDb {
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }         
     }
-}
+    
+    public void updateActivity() {
+        if (activitiesTable.isEditing())
+            activitiesTable.getCellEditor().stopCellEditing();
+        
+        DefaultTableModel tModel = (DefaultTableModel) activitiesTable.getModel();
+        int selectedRow = activitiesTable.getSelectedRow();
+        int activityIdRow = (int) activitiesTable.getModel().getValueAt(selectedRow, 0);
+        String activityDateRow = activitiesTable.getModel().getValueAt(selectedRow, 1).toString();
+        String activityTypeRow = activitiesTable.getModel().getValueAt(selectedRow, 2).toString();
+        String activityTimeRow = activitiesTable.getModel().getValueAt(selectedRow, 3).toString();
+        String activityDurationRow = activitiesTable.getModel().getValueAt(selectedRow, 4).toString();
+        String activityCaloriesRow = activitiesTable.getModel().getValueAt(selectedRow, 5).toString();
+        
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+          
+           CallableStatement cs = 
+                    conn.prepareCall("{call dbo.updateActivity(?,?,?,?,?,?)}"); 
+            cs.setInt(1, activityIdRow);
+            cs.setString(2, activityDateRow);
+            cs.setString(3, activityTypeRow);
+            cs.setString(4, activityTimeRow);
+            cs.setString(5, activityDurationRow);
+            cs.setString(6, activityCaloriesRow);
+            cs.execute();
+            conn.close();
+            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o aktywności: "+activityTypeRow+"" 
+                    , "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+        } catch(Exception exc) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
+                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+        }
+}   }
 

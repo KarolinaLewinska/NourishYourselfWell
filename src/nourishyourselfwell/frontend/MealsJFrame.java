@@ -345,7 +345,7 @@ public class MealsJFrame extends javax.swing.JFrame {
 
     private void deleteMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMealBActionPerformed
         mdb.deleteMeal();
-        mdb.showMeals(mealsSearchTF.getText());
+        mdb.showMealsDate();
     }//GEN-LAST:event_deleteMealBActionPerformed
 
     private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed
