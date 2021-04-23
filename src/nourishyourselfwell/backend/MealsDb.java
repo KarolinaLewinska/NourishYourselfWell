@@ -125,4 +125,30 @@ public class MealsDb {
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }         
     } 
+    
+    public void updateMeal() {
+        DefaultTableModel tModel = (DefaultTableModel) mealsTable.getModel();
+        int selectedRow = mealsTable.getSelectedRow();
+        int idRow = (int) mealsTable.getModel().getValueAt(selectedRow, 0);
+        
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            CallableStatement cs = 
+                    conn.prepareCall("{call dbo.deleteMeal(?)}"); 
+            cs.setInt(1, idRow);
+            cs.execute();
+            conn.close();
+            JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o posiłku" 
+                    , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
+            while(mealsTable.getRowCount() > 0) {
+                ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
+            }
+        } catch(Exception exc) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
+                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+        }         
+    } 
 }

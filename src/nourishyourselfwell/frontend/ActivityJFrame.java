@@ -318,6 +318,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
 
     private void deleteActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActivityBActionPerformed
         adb.deleteActivity();
+        adb.showActivities(activitySearchTF.getText());
     }//GEN-LAST:event_deleteActivityBActionPerformed
 
     private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed

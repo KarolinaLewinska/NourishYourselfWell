@@ -312,7 +312,7 @@ public class MealsJFrame extends javax.swing.JFrame {
                                 .addComponent(addMealB))
                             .addComponent(editMealB)
                             .addComponent(deleteMealB))))
-                .addGap(4, 4, 4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -337,6 +337,7 @@ public class MealsJFrame extends javax.swing.JFrame {
 
     private void deleteMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMealBActionPerformed
         mdb.deleteMeal();
+        mdb.showMeals(mealsSearchTF.getText());
     }//GEN-LAST:event_deleteMealBActionPerformed
 
     private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed
