@@ -64,6 +64,53 @@ public class StatisticsDbMeals {
         }
         return meals;
     }
+    public ArrayList selectAverageMealCalories() {
+        ArrayList<Meal> meals = new ArrayList();
+        
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            
+            PreparedStatement ps = conn.prepareStatement("{call dbo.averageMealCaloriesStatistics}");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                meals.add(new Meal(rs.getInt("average")));
+            }
+            conn.close();
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
+                    + e.getMessage(),
+                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+        }
+        return meals;
+    }
     
-     
+    public ArrayList selectSumOfCaloriesByDate(String mealDate) {
+        ArrayList<Meal> meals = new ArrayList();
+        
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            
+            PreparedStatement ps = conn.prepareStatement("{call dbo.sumOfCaloriesByDateStatistics(?)}");
+            ps.setString(1, mealDate);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                meals.add(new Meal(rs.getInt("sum")));
+                
+            }
+            conn.close();
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
+                    + e.getMessage(),
+                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+        }
+        return meals;
+    }
 }

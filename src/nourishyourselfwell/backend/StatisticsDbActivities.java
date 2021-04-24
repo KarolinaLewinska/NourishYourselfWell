@@ -9,11 +9,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class StatisticsDbActivities {
-    private JTextField mostBurntCaloriesTF, favouriteActivityTF;
+    private JTextField mostBurntCaloriesTF, favouriteActivityTF, theLongestDurationTF;
     
     public StatisticsDbActivities (JTextField activityStatisticTF) {
         this.mostBurntCaloriesTF = mostBurntCaloriesTF;
         this.favouriteActivityTF = favouriteActivityTF;
+        this.theLongestDurationTF = theLongestDurationTF;
     }
    
     public ArrayList selectMostBurntCalories() {
@@ -62,4 +63,28 @@ public class StatisticsDbActivities {
         }
         return activities;
     } 
+    public ArrayList selectAverageBurntCalories() {
+        ArrayList<Activity> activities = new ArrayList();
+        
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            
+            PreparedStatement ps = conn.prepareStatement("{call dbo.averageBurntCaloriesStatistics}");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                activities.add(new Activity(rs.getInt("average")));
+            }
+            conn.close();
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
+                    + e.getMessage(),
+                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+        }
+        return activities;
+    }
+    
 }

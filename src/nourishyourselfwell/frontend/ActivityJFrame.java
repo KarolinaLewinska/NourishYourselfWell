@@ -332,6 +332,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private void addActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActivityBActionPerformed
         adb.addActivity(activityDateTF.getText(), activityTypeTA.getText(), 
                 startTimeTF.getText(), durationTF.getText(), caloriesTF.getText());
+        adb.showActivities(activitySearchTF.getText());
     }//GEN-LAST:event_addActivityBActionPerformed
 
     private void deleteActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActivityBActionPerformed
