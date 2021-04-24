@@ -161,5 +161,4 @@ public class MealsDb {
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     } 
-
 }

@@ -153,13 +153,11 @@
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="mealComboBox" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                          <Component id="mealsSearchTF" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="previousDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nextDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="mealsSearchTF" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="previousDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="nextDate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="mealComboBox" min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="mealDateTF" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>

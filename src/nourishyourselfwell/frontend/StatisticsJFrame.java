@@ -1,12 +1,34 @@
 package nourishyourselfwell.frontend;
 
-import nourishyourselfwell.backend.StatisticsDb;
+import java.util.ArrayList;
+import nourishyourselfwell.backend.Activity;
+import nourishyourselfwell.backend.Meal;
+import nourishyourselfwell.backend.StatisticsDbActivities;
+import nourishyourselfwell.backend.StatisticsDbMeals;
 
 public class StatisticsJFrame extends javax.swing.JFrame {
 
     public StatisticsJFrame() {
         initComponents();
-        //sdb = new StatisticsDb(mostCaloricTF);
+        sdbM = new StatisticsDbMeals(caloriesTF);
+        sdbM2 = new StatisticsDbMeals(favouriteMealTF);
+        sdbA = new StatisticsDbActivities(mostBurntCaloriesTF);
+        sdbA2 = new StatisticsDbActivities(favouriteActivityTF);
+        meals = sdbM.selectMostCaloricMeal();
+        meals2 = sdbM2.selectFavouriteMeal();
+        activities = sdbA.selectMostBurntCalories();
+        activities = sdbA2.selectFavouriteActivity();
+        displayDate(datePosition);
+    }
+    public void displayDate(int datePosition) {
+        Meal meal = (Meal)meals.get(datePosition);
+        Meal meal2 = (Meal)meals2.get(datePosition);
+        Activity activity = (Activity)activities.get(datePosition);
+        Activity activity2 = (Activity)activities.get(datePosition);
+        caloriesTF.setText(String.valueOf(meal.getCalories()));
+        favouriteMealTF.setText(String.valueOf(meal2.getMealName()));
+        mostBurntCaloriesTF.setText(String.valueOf(activity.getCalories()));
+        favouriteActivityTF.setText(String.valueOf(activity2.getActivityType()));
     }
     
     @SuppressWarnings("unchecked")
@@ -19,12 +41,11 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        mostCaloricB = new javax.swing.JButton();
-        mostCaloricTF = new javax.swing.JTextField();
+        caloriesTF = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        mostCaloricTF1 = new javax.swing.JTextField();
-        mostCaloricTF2 = new javax.swing.JTextField();
-        mostCaloricTF3 = new javax.swing.JTextField();
+        favouriteMealTF = new javax.swing.JTextField();
+        mostBurntCaloriesTF = new javax.swing.JTextField();
+        favouriteActivityTF = new javax.swing.JTextField();
         mostCaloricTF4 = new javax.swing.JTextField();
         mostCaloricTF5 = new javax.swing.JTextField();
         mostCaloricTF6 = new javax.swing.JTextField();
@@ -33,6 +54,7 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         mostCaloricTF7 = new javax.swing.JTextField();
         mostCaloricTF8 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        refreshButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(239, 191, 87));
@@ -54,37 +76,30 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setText("Ulubiony posiłek");
 
-        mostCaloricB.setText("jButton1");
-        mostCaloricB.addActionListener(new java.awt.event.ActionListener() {
+        caloriesTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostCaloricBActionPerformed(evt);
-            }
-        });
-
-        mostCaloricTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostCaloricTFActionPerformed(evt);
+                caloriesTFActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel7.setText("Suma spożytych kalorii");
 
-        mostCaloricTF1.addActionListener(new java.awt.event.ActionListener() {
+        favouriteMealTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostCaloricTF1ActionPerformed(evt);
+                favouriteMealTFActionPerformed(evt);
             }
         });
 
-        mostCaloricTF2.addActionListener(new java.awt.event.ActionListener() {
+        mostBurntCaloriesTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostCaloricTF2ActionPerformed(evt);
+                mostBurntCaloriesTFActionPerformed(evt);
             }
         });
 
-        mostCaloricTF3.addActionListener(new java.awt.event.ActionListener() {
+        favouriteActivityTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostCaloricTF3ActionPerformed(evt);
+                favouriteActivityTFActionPerformed(evt);
             }
         });
 
@@ -128,6 +143,13 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         jLabel10.setText("Data");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
+        refreshButton.setText("r");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,47 +159,51 @@ public class StatisticsJFrame extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mostCaloricTF3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(mostCaloricTF5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(refreshButton)
+                        .addGap(89, 89, 89))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(favouriteActivityTF))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mostCaloricTF4))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(caloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(favouriteMealTF))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mostBurntCaloriesTF)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(mostCaloricTF7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                                    .addComponent(mostCaloricTF6)
-                                    .addComponent(mostCaloricTF8)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mostCaloricTF4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mostCaloricTF, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(mostCaloricB))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mostCaloricTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mostCaloricTF2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(158, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mostCaloricTF5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(mostCaloricTF7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                            .addComponent(mostCaloricTF6)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(mostCaloricTF8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(205, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,22 +213,21 @@ public class StatisticsJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(mostCaloricB)
-                    .addComponent(mostCaloricTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(caloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(mostCaloricTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(favouriteMealTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mostCaloricTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mostBurntCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mostCaloricTF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(favouriteActivityTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mostCaloricTF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,39 +241,41 @@ public class StatisticsJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(mostCaloricTF7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(mostCaloricTF8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mostCaloricTF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(mostCaloricTF8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(mostCaloricTF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addContainerGap(26, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(refreshButton)
+                        .addGap(40, 40, 40))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mostCaloricBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricBActionPerformed
-        //sdb.mostCaloricMeal();
-    }//GEN-LAST:event_mostCaloricBActionPerformed
+    private void caloriesTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caloriesTFActionPerformed
 
-    private void mostCaloricTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricTFActionPerformed
-     
-    }//GEN-LAST:event_mostCaloricTFActionPerformed
+    }//GEN-LAST:event_caloriesTFActionPerformed
 
-    private void mostCaloricTF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricTF1ActionPerformed
+    private void favouriteMealTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favouriteMealTFActionPerformed
+
+    }//GEN-LAST:event_favouriteMealTFActionPerformed
+
+    private void mostBurntCaloriesTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostBurntCaloriesTFActionPerformed
+
+    }//GEN-LAST:event_mostBurntCaloriesTFActionPerformed
+
+    private void favouriteActivityTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favouriteActivityTFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mostCaloricTF1ActionPerformed
-
-    private void mostCaloricTF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricTF2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mostCaloricTF2ActionPerformed
-
-    private void mostCaloricTF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricTF3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mostCaloricTF3ActionPerformed
+    }//GEN-LAST:event_favouriteActivityTFActionPerformed
 
     private void mostCaloricTF4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricTF4ActionPerformed
         // TODO add your handling code here:
@@ -269,6 +296,14 @@ public class StatisticsJFrame extends javax.swing.JFrame {
     private void mostCaloricTF8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostCaloricTF8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mostCaloricTF8ActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+
+//        sdb.selectMostCaloricMeal();
+//        displayDate(datePosition);
+        
+        
+    }//GEN-LAST:event_refreshButtonActionPerformed
     
     public static void main(String args[]) {
         try {
@@ -297,6 +332,9 @@ public class StatisticsJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField caloriesTF;
+    private javax.swing.JTextField favouriteActivityTF;
+    private javax.swing.JTextField favouriteMealTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -307,16 +345,18 @@ public class StatisticsJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JButton mostCaloricB;
-    private javax.swing.JTextField mostCaloricTF;
-    private javax.swing.JTextField mostCaloricTF1;
-    private javax.swing.JTextField mostCaloricTF2;
-    private javax.swing.JTextField mostCaloricTF3;
+    private javax.swing.JTextField mostBurntCaloriesTF;
     private javax.swing.JTextField mostCaloricTF4;
     private javax.swing.JTextField mostCaloricTF5;
     private javax.swing.JTextField mostCaloricTF6;
     private javax.swing.JTextField mostCaloricTF7;
     private javax.swing.JTextField mostCaloricTF8;
+    private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
-    private StatisticsDb sdb;
+    private StatisticsDbMeals sdbM, sdbM2;
+    private StatisticsDbActivities sdbA, sdbA2;
+    private ArrayList<Meal> meals, meals2;
+    private ArrayList<Activity> activities, activities2;
+   
+    private int datePosition;
 }

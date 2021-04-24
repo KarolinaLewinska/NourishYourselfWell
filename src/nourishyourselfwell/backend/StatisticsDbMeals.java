@@ -1,0 +1,69 @@
+package nourishyourselfwell.backend;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+public class StatisticsDbMeals {
+    private JTextField mostCaloricTF, favouriteMealTF;
+    
+    public StatisticsDbMeals (JTextField mealStatisticTF) {
+        this.mostCaloricTF = mostCaloricTF;
+        this.favouriteMealTF = favouriteMealTF;
+        
+    }
+        
+    public ArrayList selectMostCaloricMeal() {
+        ArrayList<Meal> meals = new ArrayList();
+        
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            
+            PreparedStatement ps = conn.prepareStatement("{call dbo.mostCaloricMealStatistics}");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                meals.add(new Meal(rs.getInt("calories")));
+            }
+            conn.close();
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
+                    + e.getMessage(),
+                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+        }
+        return meals;
+    }
+    
+    public ArrayList selectFavouriteMeal() {
+        ArrayList<Meal> meals = new ArrayList();
+        
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+                    "nourishYourselfAdmin", "admin12"); 
+            
+            PreparedStatement ps = conn.prepareStatement("{call dbo.favouriteMealStatistics}");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                meals.add(new Meal(rs.getString("mealName")));
+            }
+            conn.close();
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
+                    + e.getMessage(),
+                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+        }
+        return meals;
+    }
+    
+     
+}
