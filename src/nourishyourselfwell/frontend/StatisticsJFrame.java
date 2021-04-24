@@ -1,6 +1,7 @@
 package nourishyourselfwell.frontend;
 
 import java.util.ArrayList;
+
 import nourishyourselfwell.backend.Activity;
 import nourishyourselfwell.backend.Meal;
 import nourishyourselfwell.backend.StatisticsDbActivities;
@@ -23,7 +24,7 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         meals = sdbM.selectMostCaloricMeal();
         meals2 = sdbM2.selectFavouriteMeal();
         meals3 = sdbM3.selectAverageMealCalories();
-        meals4 = sdbM4.selectSumOfCaloriesByDate(mealDateTF.getText());
+        
         
         activities = sdbA.selectMostBurntCalories();
         activities2 = sdbA2.selectFavouriteActivity();
@@ -37,7 +38,7 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         Meal meal = (Meal)meals.get(dataPosition);
         Meal meal2 = (Meal)meals2.get(dataPosition);
         Meal meal3 = (Meal)meals3.get(dataPosition);
-        Meal meal4 = (Meal)meals4.get(dataPosition);
+        
         
         
         Activity activity = (Activity)activities.get(dataPosition);
@@ -48,7 +49,7 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         caloriesTF.setText(String.valueOf(meal.getCalories()));
         favouriteMealTF.setText(String.valueOf(meal2.getMealName()));
         averageMealCaloriesTF.setText(String.valueOf(meal3.getCalories()));
-        sumOfCaloriesTF.setText(String.valueOf(meal4.getCalories()));
+        
         
         
         mostBurntCaloriesTF.setText(String.valueOf(activity.getCalories()));
@@ -56,12 +57,6 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         averageBurntCaloriesTF.setText(String.valueOf(activity3.getCalories()));
     }
     
-    public void refreshData(int dataPosition) {
-        Meal meal4 = (Meal)meals4.get(dataPosition);
-        sumOfCaloriesTF.setText(String.valueOf(meal4.getCalories()));
-        sumOfCaloriesTF.repaint();
-        
-    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -84,7 +79,6 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         averageBurntCaloriesTF = new javax.swing.JTextField();
         sumOfCaloriesTF = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        refreshButton = new javax.swing.JButton();
         sumOfCaloriesB = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
@@ -99,7 +93,7 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         jLabel3.setText("Najwięcej spalonych kalorii");
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel4.setText("Najczęstsza aktywność fizyczna");
+        jLabel4.setText("Ulubiona aktywność fizyczna");
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setText("Ulubiony posiłek");
@@ -131,6 +125,8 @@ public class StatisticsJFrame extends javax.swing.JFrame {
             }
         });
 
+        mealDateTF.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        mealDateTF.setText("rrrr-mm-dd");
         mealDateTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mealDateTFActionPerformed(evt);
@@ -165,14 +161,7 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         jLabel10.setText("Data");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
-        refreshButton.setText("r");
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
-            }
-        });
-
-        sumOfCaloriesB.setText("jButton1");
+        sumOfCaloriesB.setText("Sprawdź");
         sumOfCaloriesB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sumOfCaloriesBActionPerformed(evt);
@@ -188,15 +177,12 @@ public class StatisticsJFrame extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mealDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sumOfCaloriesB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                        .addComponent(refreshButton)
-                        .addGap(89, 89, 89))
+                        .addGap(222, 222, 222))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -227,10 +213,10 @@ public class StatisticsJFrame extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(averageBurntCaloriesTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                                             .addComponent(averageMealCaloriesTF)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(4, 4, 4)
                                         .addComponent(sumOfCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(205, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,30 +241,24 @@ public class StatisticsJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(favouriteActivityTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(averageMealCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(averageBurntCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(sumOfCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mealDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(sumOfCaloriesB))
-                        .addContainerGap(25, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(refreshButton)
-                        .addGap(40, 40, 40))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(averageMealCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(averageBurntCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(sumOfCaloriesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(mealDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sumOfCaloriesB))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -316,18 +296,8 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sumOfCaloriesTFActionPerformed
 
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-   
-        
-    }//GEN-LAST:event_refreshButtonActionPerformed
-
     private void sumOfCaloriesBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumOfCaloriesBActionPerformed
-        sdbM.selectSumOfCaloriesByDate(mealDateTF.getText());
-        refreshData(dataPosition);
-        
-        
-        
-       
+        sdbM4.selectSumOfCaloriesByDate(mealDateTF.getText(),sumOfCaloriesTF );     
     }//GEN-LAST:event_sumOfCaloriesBActionPerformed
     
     public static void main(String args[]) {
@@ -373,7 +343,6 @@ public class StatisticsJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField mealDateTF;
     private javax.swing.JTextField mostBurntCaloriesTF;
-    private javax.swing.JButton refreshButton;
     private javax.swing.JButton sumOfCaloriesB;
     private javax.swing.JTextField sumOfCaloriesTF;
     // End of variables declaration//GEN-END:variables

@@ -88,8 +88,8 @@ public class StatisticsDbMeals {
         return meals;
     }
     
-    public ArrayList selectSumOfCaloriesByDate(String mealDate) {
-        ArrayList<Meal> meals = new ArrayList();
+    public void selectSumOfCaloriesByDate(String mealDate, JTextField textField) {
+        
         
          try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -101,8 +101,9 @@ public class StatisticsDbMeals {
             ps.setString(1, mealDate);
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                meals.add(new Meal(rs.getInt("sum")));
-                
+                textField.setText(rs.getString("sum"));
+                        
+     
             }
             conn.close();
             
@@ -111,6 +112,6 @@ public class StatisticsDbMeals {
                     + e.getMessage(),
                     "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
-        return meals;
+     
     }
 }
