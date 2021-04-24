@@ -14,7 +14,7 @@ public class StartJFrame extends javax.swing.JFrame {
         
         sf = new StatisticsJFrame();
         sf.setTitle("Statystyki");
-        sf.setSize(680,480);
+        sf.setSize(480,480);
     }
     
     @SuppressWarnings("unchecked")

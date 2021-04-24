@@ -9,11 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class StatisticsDbMeals {
-    private JTextField mostCaloricTF, favouriteMealTF;
     
     public StatisticsDbMeals (JTextField mealStatisticTF) {
-        this.mostCaloricTF = mostCaloricTF;
-        this.favouriteMealTF = favouriteMealTF;
         
     }
         
@@ -64,6 +61,7 @@ public class StatisticsDbMeals {
         }
         return meals;
     }
+    
     public ArrayList selectAverageMealCalories() {
         ArrayList<Meal> meals = new ArrayList();
         
@@ -89,8 +87,6 @@ public class StatisticsDbMeals {
     }
     
     public void selectSumOfCaloriesByDate(String mealDate, JTextField textField) {
-        
-        
          try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
@@ -102,8 +98,6 @@ public class StatisticsDbMeals {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 textField.setText(rs.getString("sum"));
-                        
-     
             }
             conn.close();
             
@@ -112,6 +106,5 @@ public class StatisticsDbMeals {
                     + e.getMessage(),
                     "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
-     
     }
 }

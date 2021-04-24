@@ -163,5 +163,6 @@ public class ActivityDb {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
-}   }
+    }
+}
 

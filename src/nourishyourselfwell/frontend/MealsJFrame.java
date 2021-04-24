@@ -350,7 +350,7 @@ public class MealsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addMealBActionPerformed
 
     private void mealsSearchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealsSearchTFActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_mealsSearchTFActionPerformed
 
     private void deleteMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMealBActionPerformed
