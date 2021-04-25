@@ -14,9 +14,6 @@ public class MealsDb {
     
     public void showMeals(String mealDate) {
         try {
-            ((DefaultTableCellRenderer)mealsTable.getDefaultRenderer(String.class))
-                    .setHorizontalAlignment(SwingConstants.CENTER);
-     
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
@@ -46,10 +43,8 @@ public class MealsDb {
             rs.close();
             conn.close();
             
-            for (int i = 0; i < 6; i++) {
-                mealsTable.getColumnModel().getColumn(i)
-                    .setCellRenderer(new WordWrapCellRenderer());
-            }
+            mealsTable.getColumnModel().getColumn(3)
+                .setCellRenderer(new WordWrapCellRenderer());
             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),

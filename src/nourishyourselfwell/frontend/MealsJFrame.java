@@ -167,7 +167,7 @@ public class MealsJFrame extends javax.swing.JFrame {
         mealDateTF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         mealDateTF.setText("rrrr-mm-dd");
 
-        mealsTable.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        mealsTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(83, 176, 83)));
         mealsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -178,6 +178,7 @@ public class MealsJFrame extends javax.swing.JFrame {
         ));
         mealsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         mealsTable.setAutoscrolls(false);
+        mealsTable.setGridColor(new java.awt.Color(83, 176, 83));
         mealsTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
         mealsTable.getTableHeader().setResizingAllowed(false);
         mealsTable.getTableHeader().setReorderingAllowed(false);

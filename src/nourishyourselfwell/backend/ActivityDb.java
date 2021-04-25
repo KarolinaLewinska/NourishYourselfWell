@@ -44,11 +44,10 @@ public class ActivityDb {
             }
             rs.close();
             conn.close();
-            
-             for (int i = 0; i < 6; i++) {
-                activitiesTable.getColumnModel().getColumn(i)
+          
+            activitiesTable.getColumnModel().getColumn(2)
                     .setCellRenderer(new WordWrapCellRenderer());
-            }
+            
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd: " + exc.getMessage(),
                     "Wystąpił błąd podczas wyświetlania danych", JOptionPane.ERROR_MESSAGE);

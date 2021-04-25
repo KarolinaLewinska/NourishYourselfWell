@@ -159,6 +159,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
             }
         });
 
+        activitiesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(83, 176, 83)));
         activitiesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -177,6 +178,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
         });
         activitiesTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         activitiesTable.setDoubleBuffered(true);
+        activitiesTable.setGridColor(new java.awt.Color(83, 176, 83));
         activitiesTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
         activitiesTable.getTableHeader().setResizingAllowed(false);
         activitiesTable.getTableHeader().setReorderingAllowed(false);
