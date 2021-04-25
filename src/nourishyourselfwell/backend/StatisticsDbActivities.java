@@ -13,7 +13,7 @@ public class StatisticsDbActivities {
     public StatisticsDbActivities (JTextField activityStatisticTF) {
 
     }
-   
+    
     public ArrayList selectMostBurntCalories() {
         ArrayList<Activity> activities = new ArrayList();
         

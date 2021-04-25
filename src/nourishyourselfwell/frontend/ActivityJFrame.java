@@ -9,7 +9,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
     public ActivityJFrame() {
         initComponents();
         adb = new ActivityDb(activitiesTable);
-        activities= adb.showActivitiesDate();
+        activities = adb.showActivitiesDate();
         displayDate(datePosition);
     }
     private void displayDate(int datePosition) {
@@ -175,8 +175,11 @@ public class ActivityJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        activitiesTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         activitiesTable.setDoubleBuffered(true);
         activitiesTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        activitiesTable.getTableHeader().setResizingAllowed(false);
+        activitiesTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(activitiesTable);
         if (activitiesTable.getColumnModel().getColumnCount() > 0) {
             activitiesTable.getColumnModel().getColumn(0).setResizable(false);

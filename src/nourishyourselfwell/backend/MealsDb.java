@@ -45,8 +45,12 @@ public class MealsDb {
             }
             rs.close();
             conn.close();
-            mealsTable.getColumnModel().getColumn(3)
+            
+            for (int i = 0; i < 6; i++) {
+                mealsTable.getColumnModel().getColumn(i)
                     .setCellRenderer(new WordWrapCellRenderer());
+            }
+            
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),
                     "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);

@@ -14,9 +14,6 @@ public class ActivityDb {
     
     public void showActivities(String activityDate) {
         try {
-            ((DefaultTableCellRenderer)activitiesTable.getDefaultRenderer(String.class))
-                    .setHorizontalAlignment(SwingConstants.CENTER);
-            
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
@@ -34,6 +31,7 @@ public class ActivityDb {
             while(activitiesTable.getRowCount() > 0) {
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
             }
+            
             int columns = rs.getMetaData().getColumnCount();
             while(rs.next()) {  
                 Object[] row = new Object[columns];
@@ -46,8 +44,11 @@ public class ActivityDb {
             }
             rs.close();
             conn.close();
-            activitiesTable.getColumnModel().getColumn(2)
+            
+             for (int i = 0; i < 6; i++) {
+                activitiesTable.getColumnModel().getColumn(i)
                     .setCellRenderer(new WordWrapCellRenderer());
+            }
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd: " + exc.getMessage(),
                     "Wystąpił błąd podczas wyświetlania danych", JOptionPane.ERROR_MESSAGE);

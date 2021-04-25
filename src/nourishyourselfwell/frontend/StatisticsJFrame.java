@@ -29,7 +29,6 @@ public class StatisticsJFrame extends javax.swing.JFrame {
         activities3 = sdbA3.selectAverageBurntCalories();
   
         displayData(dataPosition);
-       
     }
     
     public void displayData(int dataPosition) {

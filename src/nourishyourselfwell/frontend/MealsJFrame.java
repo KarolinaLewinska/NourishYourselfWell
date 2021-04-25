@@ -13,6 +13,7 @@ public class MealsJFrame extends javax.swing.JFrame {
         displayDate(datePosition);
       
     }
+    
     private void displayDate(int datePosition) {
         previousDate.setEnabled(true);
         nextDate.setEnabled(true);
@@ -20,6 +21,8 @@ public class MealsJFrame extends javax.swing.JFrame {
         if (datePosition == (meals.size()-1)) nextDate.setEnabled(false);
         Meal meal = (Meal)meals.get(datePosition);
         mealsSearchTF.setText(meal.getMealDate().toString());
+        
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -173,15 +176,16 @@ public class MealsJFrame extends javax.swing.JFrame {
                 "Id", "Data", "Rodzaj", "Nazwa ", "Godzina", "Kalorie"
             }
         ));
-        mealsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        mealsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         mealsTable.setAutoscrolls(false);
         mealsTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        mealsTable.getTableHeader().setResizingAllowed(false);
+        mealsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(mealsTable);
         if (mealsTable.getColumnModel().getColumnCount() > 0) {
             mealsTable.getColumnModel().getColumn(0).setResizable(false);
             mealsTable.getColumnModel().getColumn(1).setResizable(false);
             mealsTable.getColumnModel().getColumn(2).setResizable(false);
-            mealsTable.getColumnModel().getColumn(3).setResizable(false);
             mealsTable.getColumnModel().getColumn(4).setResizable(false);
             mealsTable.getColumnModel().getColumn(5).setResizable(false);
         }
