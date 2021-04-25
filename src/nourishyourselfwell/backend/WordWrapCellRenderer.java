@@ -1,8 +1,7 @@
 package nourishyourselfwell.backend;
 
 import java.awt.Component;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 
 public class WordWrapCellRenderer extends JTextArea implements TableCellRenderer {

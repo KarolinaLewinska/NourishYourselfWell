@@ -3,11 +3,11 @@ package nourishyourselfwell.backend;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class MealsDb {
     private JTable mealsTable;
+    
     public MealsDb (JTable mealsTable) {
         this.mealsTable = mealsTable;
     }
@@ -23,13 +23,15 @@ public class MealsDb {
             ps.setString(1, mealDate);
             ResultSet rs = ps.executeQuery();
             
-            if (!rs.isBeforeFirst()) {
+            if (!rs.isBeforeFirst()) { 
                 JOptionPane.showMessageDialog(null, "Brak danych w bazie o podanej dacie" 
                      , "Brak danych", JOptionPane.INFORMATION_MESSAGE);
             }
+            
             while(mealsTable.getRowCount() > 0) {
                 ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
             }
+            
             int columns = rs.getMetaData().getColumnCount();
             while(rs.next()) {  
                 Object[] row = new Object[columns];
@@ -51,15 +53,15 @@ public class MealsDb {
                     "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
     public ArrayList showMealsDate() {
-        ArrayList<Meal> meals = new ArrayList();
+        ArrayList<Meal> meals = new ArrayList();        
         
-         try {
+        try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.showMealsDate}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -69,8 +71,7 @@ public class MealsDb {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat spożytych posiłków " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -98,6 +99,7 @@ public class MealsDb {
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     } 
+    
     public void deleteMeal() {
         DefaultTableModel tModel = (DefaultTableModel) mealsTable.getModel();
         int selectedRow = mealsTable.getSelectedRow();
@@ -115,9 +117,11 @@ public class MealsDb {
             conn.close();
             JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o posiłku" 
                     , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
+            
             while(mealsTable.getRowCount() > 0) {
                 ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
             }
+            
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
@@ -142,7 +146,6 @@ public class MealsDb {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-          
            CallableStatement cs = 
                     conn.prepareCall("{call dbo.updateMeal(?,?,?,?,?,?)}"); 
             cs.setInt(1, mealIdRow);
@@ -153,8 +156,8 @@ public class MealsDb {
             cs.setString(6, mealCaloriesRow);
             cs.execute();
             conn.close();
-            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku: "+mealNameRow+""
-                    , "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku: "
+                    +mealNameRow+"", "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                     + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);

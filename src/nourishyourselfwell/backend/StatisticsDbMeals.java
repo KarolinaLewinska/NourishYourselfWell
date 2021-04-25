@@ -1,12 +1,8 @@
 package nourishyourselfwell.backend;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class StatisticsDbMeals {
     
@@ -22,7 +18,6 @@ public class StatisticsDbMeals {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.mostCaloricMealStatistics}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -32,8 +27,7 @@ public class StatisticsDbMeals {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -46,7 +40,6 @@ public class StatisticsDbMeals {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.favouriteMealStatistics}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -56,8 +49,7 @@ public class StatisticsDbMeals {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -70,7 +62,6 @@ public class StatisticsDbMeals {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.averageMealCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -80,8 +71,7 @@ public class StatisticsDbMeals {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -92,7 +82,6 @@ public class StatisticsDbMeals {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.sumOfCaloriesByDateStatistics(?)}");
             ps.setString(1, mealDate);
             ResultSet rs = ps.executeQuery();
@@ -103,8 +92,7 @@ public class StatisticsDbMeals {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

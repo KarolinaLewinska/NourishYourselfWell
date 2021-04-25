@@ -1,12 +1,8 @@
 package nourishyourselfwell.backend;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class StatisticsDbActivities {
     
@@ -21,8 +17,7 @@ public class StatisticsDbActivities {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
-                    "nourishYourselfAdmin", "admin12"); 
-            
+                    "nourishYourselfAdmin", "admin12");
             PreparedStatement ps = conn.prepareStatement("{call dbo.mostBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -32,20 +27,19 @@ public class StatisticsDbActivities {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
     
     public ArrayList selectFavouriteActivity() {
         ArrayList<Activity> activities = new ArrayList();
+        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.favouriteActivityStatistics}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -55,8 +49,7 @@ public class StatisticsDbActivities {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     } 
@@ -69,7 +62,6 @@ public class StatisticsDbActivities {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.averageBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -79,8 +71,7 @@ public class StatisticsDbActivities {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
@@ -91,7 +82,6 @@ public class StatisticsDbActivities {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.sumOfBurntCaloriesByDateStatistics(?)}");
             ps.setString(1, activityDate);
             ResultSet rs = ps.executeQuery();
@@ -102,8 +92,7 @@ public class StatisticsDbActivities {
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(),
-                    "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

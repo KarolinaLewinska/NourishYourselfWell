@@ -12,6 +12,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
         activities = adb.showActivitiesDate();
         displayDate(datePosition);
     }
+    
     private void displayDate(int datePosition) {
         previousDate.setEnabled(true);
         nextDate.setEnabled(true);
@@ -19,8 +20,8 @@ public class ActivityJFrame extends javax.swing.JFrame {
         if (datePosition == (activities.size()-1)) nextDate.setEnabled(false);
         Activity activity = (Activity)activities.get(datePosition);
         activitySearchTF.setText(activity.getActivityDate().toString());
-        
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -330,13 +331,13 @@ public class ActivityJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_caloriesTFActionPerformed
 
     private void showActivitiesBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActivitiesBActionPerformed
-        adb.showActivities(activitySearchTF.getText());
-         
+        adb.showActivities(activitySearchTF.getText());  
     }//GEN-LAST:event_showActivitiesBActionPerformed
 
     private void addActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActivityBActionPerformed
         adb.addActivity(activityDateTF.getText(), activityTypeTA.getText(), 
                 startTimeTF.getText(), durationTF.getText(), caloriesTF.getText());
+        activitySearchTF.setText(activityDateTF.getText());
         adb.showActivities(activitySearchTF.getText());
     }//GEN-LAST:event_addActivityBActionPerformed
 
@@ -355,7 +356,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
 
     private void editActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActivityBActionPerformed
         adb.updateActivity();
-        adb.showActivitiesDate();
+        adb.showActivities(activitySearchTF.getText());
     }//GEN-LAST:event_editActivityBActionPerformed
 
     public static void main(String args[]) {
@@ -411,6 +412,6 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField startTimeTF;
     // End of variables declaration//GEN-END:variables
     private ActivityDb adb;
-    private ArrayList<Activity>activities;
+    private ArrayList<Activity> activities;
     private int datePosition;
 }

@@ -3,7 +3,6 @@ package nourishyourselfwell.backend;
 import java.util.Date;
 
 public class Meal {
-    
     private Date mealDate;
     private String mealName;
     private int calories;

@@ -9,7 +9,7 @@ public class StartJFrame extends javax.swing.JFrame {
         mf.setSize(780,480);
         
         af = new ActivityJFrame();
-        af.setTitle("Dziennik aktywności fizycznej!");
+        af.setTitle("Dziennik aktywności fizycznej");
         af.setSize(780,480);
         
         sf = new StatisticsJFrame();
@@ -36,6 +36,7 @@ public class StartJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(195, 166, 63));

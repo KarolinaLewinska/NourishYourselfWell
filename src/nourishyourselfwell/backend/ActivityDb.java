@@ -4,10 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 
 public class ActivityDb {
     private JTable activitiesTable; 
+    
     public ActivityDb (JTable activitiesTable) {
         this.activitiesTable = activitiesTable;
     }
@@ -23,14 +23,14 @@ public class ActivityDb {
             ps.setString(1, activityDate);
             ResultSet rs = ps.executeQuery();
             
-            if (!rs.isBeforeFirst()) {
+            if (!rs.isBeforeFirst()) { 
                 JOptionPane.showMessageDialog(null, "Dane o aktywności fizycznej z podaną datą nie istnieją" 
                     , "Brak danych", JOptionPane.INFORMATION_MESSAGE);
             }
             
             while(activitiesTable.getRowCount() > 0) {
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
-            }
+            } 
             
             int columns = rs.getMetaData().getColumnCount();
             while(rs.next()) {  
@@ -46,7 +46,7 @@ public class ActivityDb {
             conn.close();
           
             activitiesTable.getColumnModel().getColumn(2)
-                    .setCellRenderer(new WordWrapCellRenderer());
+                    .setCellRenderer(new WordWrapCellRenderer()); 
             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd: " + exc.getMessage(),
@@ -62,7 +62,6 @@ public class ActivityDb {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            
             PreparedStatement ps = conn.prepareStatement("{call dbo.showActivitiesDate}");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -117,7 +116,7 @@ public class ActivityDb {
             cs.setInt(1, idRow);
             cs.execute();
             conn.close();
-            JOptionPane.showMessageDialog(null, "Pomyślnie usunięto informacje o aktywności fizycznej" 
+            JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o aktywności fizycznej" 
                     , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
             while(activitiesTable.getRowCount() > 0) {
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
@@ -129,8 +128,8 @@ public class ActivityDb {
     }
     
     public void updateActivity() {
-        if (activitiesTable.isEditing())
-            activitiesTable.getCellEditor().stopCellEditing();
+        if (activitiesTable.isEditing()) 
+            activitiesTable.getCellEditor().stopCellEditing(); 
         
         DefaultTableModel tModel = (DefaultTableModel) activitiesTable.getModel();
         int selectedRow = activitiesTable.getSelectedRow();
@@ -146,7 +145,6 @@ public class ActivityDb {
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-          
            CallableStatement cs = 
                     conn.prepareCall("{call dbo.updateActivity(?,?,?,?,?,?)}"); 
             cs.setInt(1, activityIdRow);

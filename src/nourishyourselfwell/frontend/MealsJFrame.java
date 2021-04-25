@@ -11,7 +11,6 @@ public class MealsJFrame extends javax.swing.JFrame {
         mdb = new MealsDb(mealsTable);
         meals = mdb.showMealsDate();
         displayDate(datePosition);
-      
     }
     
     private void displayDate(int datePosition) {
@@ -20,9 +19,7 @@ public class MealsJFrame extends javax.swing.JFrame {
         if (datePosition == 0) previousDate.setEnabled(false);
         if (datePosition == (meals.size()-1)) nextDate.setEnabled(false);
         Meal meal = (Meal)meals.get(datePosition);
-        mealsSearchTF.setText(meal.getMealDate().toString());
-        
-        
+        mealsSearchTF.setText(meal.getMealDate().toString());        
     }
     
     @SuppressWarnings("unchecked")
@@ -355,12 +352,12 @@ public class MealsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addMealBActionPerformed
 
     private void mealsSearchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mealsSearchTFActionPerformed
-        
+
     }//GEN-LAST:event_mealsSearchTFActionPerformed
 
     private void deleteMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMealBActionPerformed
         mdb.deleteMeal();
-        mdb.showMealsDate();
+        mdb.showMeals(mealsSearchTF.getText());
     }//GEN-LAST:event_deleteMealBActionPerformed
 
     private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed
@@ -373,10 +370,9 @@ public class MealsJFrame extends javax.swing.JFrame {
 
     private void editMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMealBActionPerformed
        mdb.updateMeal();
-        
+       mdb.showMeals(mealsSearchTF.getText());
     }//GEN-LAST:event_editMealBActionPerformed
     
-   
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
