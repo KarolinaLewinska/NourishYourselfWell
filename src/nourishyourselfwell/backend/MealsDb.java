@@ -25,12 +25,11 @@ public class MealsDb {
             
             if (!rs.isBeforeFirst()) { 
                 JOptionPane.showMessageDialog(null, "Brak danych w bazie o podanej dacie" 
-                     , "Brak danych", JOptionPane.INFORMATION_MESSAGE);
+                    , "Brak danych", JOptionPane.INFORMATION_MESSAGE);
             }
             
-            while(mealsTable.getRowCount() > 0) {
+            while(mealsTable.getRowCount() > 0) 
                 ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
-            }
             
             int columns = rs.getMetaData().getColumnCount();
             while(rs.next()) {  
@@ -50,7 +49,7 @@ public class MealsDb {
             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),
-                    "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
+                "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -64,14 +63,13 @@ public class MealsDb {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.showMealsDate}");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while(rs.next()) 
                 meals.add(new Meal(rs.getDate("mealDate")));
-            }
             conn.close();
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat spożytych posiłków " 
-                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -93,10 +91,11 @@ public class MealsDb {
             cs.execute();
             conn.close();
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano dane o posiłku: " 
-                    +mealName+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
+                +mealName+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
+        
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
-                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     } 
     
@@ -116,15 +115,14 @@ public class MealsDb {
             cs.execute();
             conn.close();
             JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o posiłku" 
-                    , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
+                , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
             
-            while(mealsTable.getRowCount() > 0) {
+            while(mealsTable.getRowCount() > 0) 
                 ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
-            }
-            
+             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
-                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }         
     } 
     
@@ -157,10 +155,11 @@ public class MealsDb {
             cs.execute();
             conn.close();
             JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku: "
-                    +mealNameRow+"", "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+                +mealNameRow+"", "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+        
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
-                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     } 
 }

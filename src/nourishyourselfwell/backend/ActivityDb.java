@@ -50,7 +50,7 @@ public class ActivityDb {
             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd: " + exc.getMessage(),
-                    "Wystąpił błąd podczas wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                "Wystąpił błąd podczas wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -64,14 +64,14 @@ public class ActivityDb {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.showActivitiesDate}");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while(rs.next()) 
                 activities.add(new Activity(rs.getDate("activityDate")));
-            }
+            
             conn.close();
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat aktywności " 
-                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
@@ -93,11 +93,11 @@ public class ActivityDb {
             cs.execute();
             conn.close();
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano dane o aktywności fizycznej: " 
-                    +activityType+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
+                +activityType+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych: " 
-                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -117,13 +117,14 @@ public class ActivityDb {
             cs.execute();
             conn.close();
             JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o aktywności fizycznej" 
-                    , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
-            while(activitiesTable.getRowCount() > 0) {
+                , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
+            
+            while(activitiesTable.getRowCount() > 0) 
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
-            }
+            
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych: " 
-                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }         
     }
     
@@ -155,11 +156,11 @@ public class ActivityDb {
             cs.setString(6, activityCaloriesRow);
             cs.execute();
             conn.close();
-            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o aktywności: "+activityTypeRow+"" 
-                    , "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o aktywności: "
+                +activityTypeRow+"", "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
-                    + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

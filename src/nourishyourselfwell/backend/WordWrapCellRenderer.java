@@ -16,9 +16,9 @@ public class WordWrapCellRenderer extends JTextArea implements TableCellRenderer
         setText(value.toString());
         setSize(table.getColumnModel().getColumn(column).getWidth(), getPreferredSize().height);
         
-        if (table.getRowHeight(row) != getPreferredSize().height) {
+        if (table.getRowHeight(row) != getPreferredSize().height) 
             table.setRowHeight(row, getPreferredSize().height);  
-        }
+        
         return this;
     }
 }

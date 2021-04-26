@@ -20,14 +20,13 @@ public class StatisticsDbActivities {
                     "nourishYourselfAdmin", "admin12");
             PreparedStatement ps = conn.prepareStatement("{call dbo.mostBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while(rs.next()) 
                 activities.add(new Activity(rs.getInt("calories")));
-            }
             conn.close();
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
@@ -42,14 +41,14 @@ public class StatisticsDbActivities {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.favouriteActivityStatistics}");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while(rs.next()) 
                 activities.add(new Activity(rs.getString("activityType")));
-            }
+            
             conn.close();
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     } 
@@ -64,14 +63,13 @@ public class StatisticsDbActivities {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.averageBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while(rs.next()) 
                 activities.add(new Activity(rs.getInt("average")));
-            }
             conn.close();
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
@@ -85,14 +83,13 @@ public class StatisticsDbActivities {
             PreparedStatement ps = conn.prepareStatement("{call dbo.sumOfBurntCaloriesByDateStatistics(?)}");
             ps.setString(1, activityDate);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while(rs.next()) 
                 textField.setText(rs.getString("sum"));
-            }
             conn.close();
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                    + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
