@@ -339,13 +339,15 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private void addActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActivityBActionPerformed
         adb.addActivity(activityDateTF.getText(), activityTypeTA.getText(), 
                 startTimeTF.getText(), durationTF.getText(), caloriesTF.getText());
+        
         activitySearchTF.setText(activityDateTF.getText());
+        activities = adb.showActivitiesDate(); 
         adb.showActivities(activitySearchTF.getText());
     }//GEN-LAST:event_addActivityBActionPerformed
 
     private void deleteActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActivityBActionPerformed
         adb.deleteActivity();
-        adb.showActivities(activitySearchTF.getText());
+        activities = adb.showActivitiesDate();
     }//GEN-LAST:event_deleteActivityBActionPerformed
 
     private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed
@@ -358,7 +360,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
 
     private void editActivityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActivityBActionPerformed
         adb.updateActivity();
-        adb.showActivities(activitySearchTF.getText());
+        activities = adb.showActivitiesDate();
     }//GEN-LAST:event_editActivityBActionPerformed
 
     public static void main(String args[]) {
