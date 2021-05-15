@@ -349,7 +349,9 @@ public class MealsJFrame extends javax.swing.JFrame {
     private void addMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMealBActionPerformed
         mdb.addMeal(mealDateTF.getText(), (String)mealComboBox.getSelectedItem(), 
                 mealNameTA.getText(), mealHourTF.getText(), caloriesTF.getText());
+       
         mealsSearchTF.setText(mealDateTF.getText());
+        meals = mdb.showMealsDate();
         mdb.showMeals(mealDateTF.getText());
     }//GEN-LAST:event_addMealBActionPerformed
 
@@ -359,7 +361,7 @@ public class MealsJFrame extends javax.swing.JFrame {
 
     private void deleteMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMealBActionPerformed
         mdb.deleteMeal();
-        mdb.showMeals(mealsSearchTF.getText());
+        meals = mdb.showMealsDate();
     }//GEN-LAST:event_deleteMealBActionPerformed
 
     private void previousDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousDateActionPerformed
@@ -372,7 +374,7 @@ public class MealsJFrame extends javax.swing.JFrame {
 
     private void editMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMealBActionPerformed
        mdb.updateMeal();
-       mdb.showMeals(mealsSearchTF.getText());
+       meals = mdb.showMealsDate();
     }//GEN-LAST:event_editMealBActionPerformed
     
     public static void main(String args[]) {
