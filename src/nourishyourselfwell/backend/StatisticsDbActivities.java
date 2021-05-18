@@ -20,8 +20,10 @@ public class StatisticsDbActivities {
                     "nourishYourselfAdmin", "admin12");
             PreparedStatement ps = conn.prepareStatement("{call dbo.mostBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()) 
                 activities.add(new Activity(rs.getInt("calories")));
+            
             conn.close();
             
         } catch(Exception e) {
@@ -41,6 +43,7 @@ public class StatisticsDbActivities {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.favouriteActivityStatistics}");
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()) 
                 activities.add(new Activity(rs.getString("activityType")));
             
@@ -63,8 +66,10 @@ public class StatisticsDbActivities {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.averageBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
+             
             while(rs.next()) 
                 activities.add(new Activity(rs.getInt("average")));
+             
             conn.close();
             
         } catch(Exception e) {
@@ -83,8 +88,10 @@ public class StatisticsDbActivities {
             PreparedStatement ps = conn.prepareStatement("{call dbo.sumOfBurntCaloriesByDateStatistics(?)}");
             ps.setString(1, activityDate);
             ResultSet rs = ps.executeQuery();
+             
             while(rs.next()) 
                 textField.setText(rs.getString("sum"));
+             
             conn.close();
             
         } catch(Exception e) {
