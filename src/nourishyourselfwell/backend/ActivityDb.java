@@ -102,7 +102,6 @@ public class ActivityDb {
     }
     
     public void deleteActivity() {
-        DefaultTableModel tModel = (DefaultTableModel) activitiesTable.getModel();
         int selectedRow = activitiesTable.getSelectedRow();
         int idRow = (int) activitiesTable.getModel().getValueAt(selectedRow, 0);
         
@@ -132,7 +131,6 @@ public class ActivityDb {
         if (activitiesTable.isEditing()) 
             activitiesTable.getCellEditor().stopCellEditing(); 
         
-        DefaultTableModel tModel = (DefaultTableModel) activitiesTable.getModel();
         int selectedRow = activitiesTable.getSelectedRow();
         int activityIdRow = (int) activitiesTable.getModel().getValueAt(selectedRow, 0);
         String activityDateRow = activitiesTable.getModel().getValueAt(selectedRow, 1).toString();
