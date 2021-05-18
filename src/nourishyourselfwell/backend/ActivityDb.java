@@ -31,7 +31,7 @@ public class ActivityDb {
             while(activitiesTable.getRowCount() > 0) {
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
             } 
-            
+         
             int columns = rs.getMetaData().getColumnCount();
             while(rs.next()) {  
                 Object[] row = new Object[columns];
@@ -56,8 +56,7 @@ public class ActivityDb {
     
     public ArrayList showActivitiesDate() {
         ArrayList<Activity> activities = new ArrayList();
-        
-         try {
+        try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
             "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
@@ -67,7 +66,6 @@ public class ActivityDb {
              
             while(rs.next()) 
                 activities.add(new Activity(rs.getDate("activityDate")));
-            
             conn.close();
             
         } catch(Exception e) {
