@@ -23,7 +23,6 @@ public class StatisticsDbActivities {
             
             while(rs.next()) 
                 activities.add(new Activity(rs.getInt("calories")));
-            
             conn.close();
             
         } catch(Exception e) {
@@ -46,7 +45,6 @@ public class StatisticsDbActivities {
             
             while(rs.next()) 
                 activities.add(new Activity(rs.getString("activityType")));
-            
             conn.close();
             
         } catch(Exception e) {
@@ -69,7 +67,6 @@ public class StatisticsDbActivities {
              
             while(rs.next()) 
                 activities.add(new Activity(rs.getInt("average")));
-             
             conn.close();
             
         } catch(Exception e) {
@@ -91,7 +88,6 @@ public class StatisticsDbActivities {
              
             while(rs.next()) 
                 textField.setText(rs.getString("sum"));
-             
             conn.close();
             
         } catch(Exception e) {
