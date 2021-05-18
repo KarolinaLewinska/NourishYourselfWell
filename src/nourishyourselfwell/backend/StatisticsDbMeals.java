@@ -46,7 +46,6 @@ public class StatisticsDbMeals {
              
             while(rs.next()) 
                 meals.add(new Meal(rs.getString("mealName")));
-             
             conn.close();
             
         } catch(Exception e) {
@@ -69,7 +68,6 @@ public class StatisticsDbMeals {
              
             while(rs.next()) 
                 meals.add(new Meal(rs.getInt("average")));
-             
             conn.close();
             
         } catch(Exception e) {
@@ -91,7 +89,6 @@ public class StatisticsDbMeals {
              
             while(rs.next()) 
                 textField.setText(rs.getString("sum"));
-             
             conn.close();
             
         } catch(Exception e) {
