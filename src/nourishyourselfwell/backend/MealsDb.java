@@ -54,8 +54,7 @@ public class MealsDb {
     }
     
     public ArrayList showMealsDate() {
-        ArrayList<Meal> meals = new ArrayList();        
-        
+        ArrayList<Meal> meals = new ArrayList();       
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
@@ -63,6 +62,7 @@ public class MealsDb {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.showMealsDate}");
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()) 
                 meals.add(new Meal(rs.getDate("mealDate")));
             conn.close();
@@ -114,6 +114,7 @@ public class MealsDb {
             cs.setInt(1, idRow);
             cs.execute();
             conn.close();
+            
             JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o posiłku" 
                 , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
             
