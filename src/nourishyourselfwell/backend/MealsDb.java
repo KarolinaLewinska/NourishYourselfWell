@@ -100,7 +100,6 @@ public class MealsDb {
     } 
     
     public void deleteMeal() {
-        DefaultTableModel tModel = (DefaultTableModel) mealsTable.getModel();
         int selectedRow = mealsTable.getSelectedRow();
         int idRow = (int) mealsTable.getModel().getValueAt(selectedRow, 0);
         
@@ -130,7 +129,6 @@ public class MealsDb {
         if (mealsTable.isEditing())
             mealsTable.getCellEditor().stopCellEditing();
         
-        DefaultTableModel tModel = (DefaultTableModel) mealsTable.getModel();
         int selectedRow = mealsTable.getSelectedRow();
         int mealIdRow = (int) mealsTable.getModel().getValueAt(selectedRow, 0);
         String mealDateRow = mealsTable.getModel().getValueAt(selectedRow, 1).toString();
