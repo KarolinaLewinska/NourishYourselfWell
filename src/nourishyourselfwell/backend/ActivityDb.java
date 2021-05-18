@@ -64,6 +64,7 @@ public class ActivityDb {
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.showActivitiesDate}");
             ResultSet rs = ps.executeQuery();
+             
             while(rs.next()) 
                 activities.add(new Activity(rs.getDate("activityDate")));
             
@@ -92,6 +93,7 @@ public class ActivityDb {
             cs.setString(5, calories);
             cs.execute();
             conn.close();
+            
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano dane o aktywności fizycznej: " 
                 +activityType+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
             
@@ -154,8 +156,10 @@ public class ActivityDb {
             cs.setString(6, activityCaloriesRow);
             cs.execute();
             conn.close();
+            
             JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o aktywności: "
                 +activityTypeRow+"", "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+            
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                 + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
