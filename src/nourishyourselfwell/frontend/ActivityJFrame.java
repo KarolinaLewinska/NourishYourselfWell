@@ -16,10 +16,13 @@ public class ActivityJFrame extends javax.swing.JFrame {
     private void displayDate(int datePosition) {
         previousDate.setEnabled(true);
         nextDate.setEnabled(true);
+        
         if (datePosition == 0) 
             previousDate.setEnabled(false);
+        
         if (datePosition == (activities.size()-1)) 
             nextDate.setEnabled(false);
+        
         Activity activity = (Activity)activities.get(datePosition);
         activitySearchTF.setText(activity.getActivityDate().toString());
     }
