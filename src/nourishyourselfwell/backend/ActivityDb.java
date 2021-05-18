@@ -117,6 +117,7 @@ public class ActivityDb {
             cs.setInt(1, idRow);
             cs.execute();
             conn.close();
+            
             JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o aktywności fizycznej" 
                 , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
             
