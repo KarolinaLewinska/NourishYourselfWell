@@ -93,7 +93,7 @@ public class ActivityDb {
             conn.close();
             
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano dane o aktywności fizycznej: " 
-                +activityType+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
+                +activityType, "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych: " 
@@ -157,7 +157,7 @@ public class ActivityDb {
             conn.close();
             
             JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o aktywności: "
-                +activityTypeRow+"", "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+                +activityTypeRow, "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
             
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
