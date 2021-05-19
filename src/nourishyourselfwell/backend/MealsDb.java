@@ -92,7 +92,7 @@ public class MealsDb {
             conn.close();
             
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano dane o posiłku: " 
-                +mealName+ ".", "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
+                +mealName, "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
         
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
@@ -156,7 +156,7 @@ public class MealsDb {
             conn.close();
             
             JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku: "
-                +mealNameRow+"", "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
+                +mealNameRow, "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
         
         } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
