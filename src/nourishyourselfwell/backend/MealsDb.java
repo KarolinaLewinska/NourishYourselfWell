@@ -55,6 +55,7 @@ public class MealsDb {
     
     public ArrayList showMealsDate() {
         ArrayList<Meal> meals = new ArrayList();       
+        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
@@ -74,8 +75,7 @@ public class MealsDb {
         return meals;
     }
     
-    public void addMeal(String mealDate, String mealType, String mealName, 
-            String mealHour, String calories) {
+    public void addMeal(String mealDate, String mealType, String mealName, String mealHour, String calories) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
