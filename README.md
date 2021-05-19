@@ -6,7 +6,7 @@
 #### StartJFrame <br/>
 !["StartJFrame"](https://github.com/KarolinaLewinska/NourishYourselfWell/blob/master/UI%20screenshots/StartJFrame.PNG) <br/>
 #### MealsJFrame <br/>
-!["MealsJFrame"](https://github.com/KarolinaLewinska/NourishYourselfWell/blob/master/UI%20screenshots/MealsJFrame.PNG) <br/>
+!["MealsJFrame"](https://github.com/KarolinaLewinska/NourishYourselfWell/blob/master/UI%20screenshots/MealsJFrame2.PNG) <br/>
 #### ActivitiesJFrame <br/>
 !["ActivitiesJFrame"](https://github.com/KarolinaLewinska/NourishYourselfWell/blob/master/UI%20screenshots/ActivitiesJFrame.PNG) <br/>
 #### StatisticsJFrame <br/>
