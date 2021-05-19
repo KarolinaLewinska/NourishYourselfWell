@@ -29,7 +29,7 @@ public class ActivityDb {
             }
             
             while(activitiesTable.getRowCount() > 0) {
-                ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
+                ((DefaultTableModel)activitiesTable.getModel()).removeRow(0);
             } 
          
             int columns = rs.getMetaData().getColumnCount();
@@ -56,6 +56,7 @@ public class ActivityDb {
     
     public ArrayList showActivitiesDate() {
         ArrayList<Activity> activities = new ArrayList();
+        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
@@ -75,8 +76,7 @@ public class ActivityDb {
         return activities;
     }
     
-    public void addActivity(String activityDate, String activityType, 
-            String startTime, String duration, String calories) {
+    public void addActivity(String activityDate, String activityType, String startTime, String duration, String calories) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection(
