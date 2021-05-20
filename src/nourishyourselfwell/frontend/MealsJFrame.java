@@ -371,7 +371,7 @@ public class MealsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_previousDateActionPerformed
 
     private void nextDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDateActionPerformed
-        displayDate(++datePosition);
+        displayDate(datePosition++);
     }//GEN-LAST:event_nextDateActionPerformed
 
     private void editMealBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMealBActionPerformed
