@@ -25,9 +25,9 @@ public class StatisticsDbActivities {
                 activities.add(new Activity(rs.getInt("calories")));
             conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
@@ -47,9 +47,9 @@ public class StatisticsDbActivities {
                 activities.add(new Activity(rs.getString("activityType")));
             conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     } 
@@ -69,9 +69,9 @@ public class StatisticsDbActivities {
                 activities.add(new Activity(rs.getInt("average")));
             conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
@@ -90,9 +90,9 @@ public class StatisticsDbActivities {
                 textField.setText(rs.getString("sum"));
             conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
