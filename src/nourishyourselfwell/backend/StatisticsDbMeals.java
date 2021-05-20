@@ -26,9 +26,9 @@ public class StatisticsDbMeals {
             
              conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -48,9 +48,9 @@ public class StatisticsDbMeals {
                 meals.add(new Meal(rs.getString("mealName")));
             conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -70,9 +70,9 @@ public class StatisticsDbMeals {
                 meals.add(new Meal(rs.getInt("average")));
             conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return meals;
     }
@@ -91,9 +91,9 @@ public class StatisticsDbMeals {
                 textField.setText(rs.getString("sum"));
             conn.close();
             
-        } catch(Exception e) {
+        } catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
-                + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
+                + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
