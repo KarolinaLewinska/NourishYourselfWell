@@ -15,11 +15,9 @@ public class ActivityDb {
     public void showActivities(String activityDate) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            PreparedStatement ps = 
-                    conn.prepareStatement("{call dbo.displayActivities(?)}");
+            PreparedStatement ps = conn.prepareStatement("{call dbo.displayActivities(?)}");
             ps.setString(1, activityDate);
             ResultSet rs = ps.executeQuery();
             
@@ -28,12 +26,12 @@ public class ActivityDb {
                     , "Brak danych", JOptionPane.INFORMATION_MESSAGE);
             }
             
-            while(activitiesTable.getRowCount() > 0) {
+            while (activitiesTable.getRowCount() > 0) {
                 ((DefaultTableModel)activitiesTable.getModel()).removeRow(0);
             } 
          
             int columns = rs.getMetaData().getColumnCount();
-            while(rs.next()) {  
+            while (rs.next()) {  
                 Object[] row = new Object[columns];
                 for (int i = 1; i <= columns; i++)
                 {  
@@ -42,13 +40,14 @@ public class ActivityDb {
                 ((DefaultTableModel) activitiesTable
                         .getModel()).insertRow(rs.getRow()-1,row);
             }
+            
             rs.close();
             conn.close();
           
             activitiesTable.getColumnModel().getColumn(2)
                     .setCellRenderer(new WordWrapCellRenderer()); 
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd: " + exc.getMessage(),
                 "Wystąpił błąd podczas wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
@@ -58,32 +57,29 @@ public class ActivityDb {
         ArrayList<Activity> activities = new ArrayList();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.showActivitiesDate}");
             ResultSet rs = ps.executeQuery();
              
             while(rs.next()) 
                 activities.add(new Activity(rs.getDate("activityDate")));
+            
             conn.close();
             
-        } catch(Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat aktywności " 
                 + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
         return activities;
     }
     
-    public void addActivity(String activityDate, String activityType, 
-                            String startTime, String duration, String calories) {
+    public void addActivity(String activityDate, String activityType, String startTime, String duration, String calories) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            CallableStatement cs = 
-                    conn.prepareCall("{call dbo.addActivity(?,?,?,?,?)}"); 
+            CallableStatement cs = conn.prepareCall("{call dbo.addActivity(?,?,?,?,?)}"); 
             cs.setString(1, activityDate);
             cs.setString(2, activityType);
             cs.setString(3, startTime);
@@ -95,7 +91,7 @@ public class ActivityDb {
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano dane o aktywności fizycznej: " 
                 +activityType, "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych: " 
                 + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
@@ -107,11 +103,9 @@ public class ActivityDb {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            CallableStatement cs = 
-                    conn.prepareCall("{call dbo.deleteActivity(?)}"); 
+            CallableStatement cs = conn.prepareCall("{call dbo.deleteActivity(?)}"); 
             cs.setInt(1, idRow);
             cs.execute();
             conn.close();
@@ -122,7 +116,7 @@ public class ActivityDb {
             while(activitiesTable.getRowCount() > 0) 
                 ((DefaultTableModel) activitiesTable.getModel()).removeRow(0);
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych: " 
                 + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }         
@@ -142,11 +136,9 @@ public class ActivityDb {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-           CallableStatement cs = 
-                    conn.prepareCall("{call dbo.updateActivity(?,?,?,?,?,?)}"); 
+           CallableStatement cs = conn.prepareCall("{call dbo.updateActivity(?,?,?,?,?,?)}"); 
             cs.setInt(1, activityIdRow);
             cs.setString(2, activityDateRow);
             cs.setString(3, activityTypeRow);
@@ -159,7 +151,7 @@ public class ActivityDb {
             JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o aktywności: "
                 +activityTypeRow, "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                 + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
