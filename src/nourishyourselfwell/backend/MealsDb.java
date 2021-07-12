@@ -54,7 +54,6 @@ public class MealsDb {
     
     public ArrayList showMealsDate() {
         ArrayList<Meal> meals = new ArrayList();       
-        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
@@ -99,7 +98,6 @@ public class MealsDb {
     public void deleteMeal() {
         int selectedRow = mealsTable.getSelectedRow();
         int idRow = (int) mealsTable.getModel().getValueAt(selectedRow, 0);
-        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
