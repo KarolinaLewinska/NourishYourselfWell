@@ -15,20 +15,21 @@ public class StatisticsDbActivities {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12");
             PreparedStatement ps = conn.prepareStatement("{call dbo.mostBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
             
-            while(rs.next()) 
+            while (rs.next()) 
                 activities.add(new Activity(rs.getInt("calories")));
+            
             conn.close();
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
                 + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
+        
         return activities;
     }
     
@@ -37,20 +38,20 @@ public class StatisticsDbActivities {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.favouriteActivityStatistics}");
             ResultSet rs = ps.executeQuery();
             
-            while(rs.next()) 
+            while (rs.next()) 
                 activities.add(new Activity(rs.getString("activityType")));
             conn.close();
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
                 + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
+        
         return activities;
     } 
     
@@ -59,38 +60,39 @@ public class StatisticsDbActivities {
         
          try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.averageBurntCaloriesStatistics}");
             ResultSet rs = ps.executeQuery();
              
-            while(rs.next()) 
+            while (rs.next()) 
                 activities.add(new Activity(rs.getInt("average")));
-            conn.close();
             
-        } catch(Exception exc) {
+             conn.close();
+            
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
                 + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
+        
         return activities;
     }
     
     public void selectSumOfBurntCaloriesByDate(String activityDate, JTextField textField) {
          try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.sumOfBurntCaloriesByDateStatistics(?)}");
             ps.setString(1, activityDate);
             ResultSet rs = ps.executeQuery();
              
-            while(rs.next()) 
+            while (rs.next()) 
                 textField.setText(rs.getString("sum"));
+            
             conn.close();
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania statystyki " 
                 + exc.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
