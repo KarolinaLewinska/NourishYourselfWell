@@ -32,13 +32,13 @@ public class StatisticsJFrame extends javax.swing.JFrame {
     }
     
     public void displayData(int dataPosition) {
-        Meal meal = (Meal)meals.get(dataPosition);
-        Meal meal2 = (Meal)meals2.get(dataPosition);
-        Meal meal3 = (Meal)meals3.get(dataPosition);
+        Meal meal = (Meal) meals.get(dataPosition);
+        Meal meal2 = (Meal) meals2.get(dataPosition);
+        Meal meal3 = (Meal) meals3.get(dataPosition);
         
-        Activity activity = (Activity)activities.get(dataPosition);
-        Activity activity2 = (Activity)activities2.get(dataPosition);
-        Activity activity3 = (Activity)activities3.get(dataPosition);
+        Activity activity = (Activity) activities.get(dataPosition);
+        Activity activity2 = (Activity) activities2.get(dataPosition);
+        Activity activity3 = (Activity) activities3.get(dataPosition);
       
         caloriesTF.setText(String.valueOf(meal.getCalories()));
         favouriteMealTF.setText(String.valueOf(meal2.getMealName()));
