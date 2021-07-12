@@ -15,11 +15,9 @@ public class MealsDb {
     public void showMeals(String mealDate) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            PreparedStatement ps = 
-                    conn.prepareStatement("{call dbo.displayMeals(?)}");
+            PreparedStatement ps = conn.prepareStatement("{call dbo.displayMeals(?)}");
             ps.setString(1, mealDate);
             ResultSet rs = ps.executeQuery();
             
@@ -28,11 +26,11 @@ public class MealsDb {
                     , "Brak danych", JOptionPane.INFORMATION_MESSAGE);
             }
             
-            while(mealsTable.getRowCount() > 0) 
+            while (mealsTable.getRowCount() > 0) 
                 ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
             
             int columns = rs.getMetaData().getColumnCount();
-            while(rs.next()) {  
+            while (rs.next()) {  
                 Object[] row = new Object[columns];
                 for (int i = 1; i <= columns; i++)
                 {  
@@ -41,13 +39,14 @@ public class MealsDb {
                 ((DefaultTableModel) mealsTable
                         .getModel()).insertRow(rs.getRow()-1,row);
             }
+            
             rs.close();
             conn.close();
             
             mealsTable.getColumnModel().getColumn(3)
                 .setCellRenderer(new WordWrapCellRenderer());
             
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Błąd " + exc.getMessage(),
                 "Błąd aplikacji", JOptionPane.ERROR_MESSAGE);
         }
@@ -58,17 +57,16 @@ public class MealsDb {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.showMealsDate}");
             ResultSet rs = ps.executeQuery();
             
-            while(rs.next()) 
+            while (rs.next()) 
                 meals.add(new Meal(rs.getDate("mealDate")));
             conn.close();
             
-        } catch(Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat spożytych posiłków " 
                 + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
@@ -78,11 +76,9 @@ public class MealsDb {
     public void addMeal(String mealDate, String mealType, String mealName, String mealHour, String calories) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            CallableStatement cs = 
-                    conn.prepareCall("{call dbo.addMeal(?,?,?,?,?)}"); 
+            CallableStatement cs = conn.prepareCall("{call dbo.addMeal(?,?,?,?,?)}"); 
             cs.setString(1, mealDate);
             cs.setString(2, mealType);
             cs.setString(3, mealName);
@@ -94,7 +90,7 @@ public class MealsDb {
             JOptionPane.showMessageDialog(null, "Pomyślnie dodano dane o posiłku: " 
                 +mealName, "Zapis udany", JOptionPane.INFORMATION_MESSAGE);
         
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                 + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
@@ -106,11 +102,9 @@ public class MealsDb {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-            CallableStatement cs = 
-                    conn.prepareCall("{call dbo.deleteMeal(?)}"); 
+            CallableStatement cs = conn.prepareCall("{call dbo.deleteMeal(?)}"); 
             cs.setInt(1, idRow);
             cs.execute();
             conn.close();
@@ -118,10 +112,10 @@ public class MealsDb {
             JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o posiłku" 
                 , "Usunięto dane", JOptionPane.INFORMATION_MESSAGE);
             
-            while(mealsTable.getRowCount() > 0) 
+            while (mealsTable.getRowCount() > 0) 
                 ((DefaultTableModel) mealsTable.getModel()).removeRow(0);
              
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                 + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }         
@@ -141,11 +135,9 @@ public class MealsDb {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-           CallableStatement cs = 
-                    conn.prepareCall("{call dbo.updateMeal(?,?,?,?,?,?)}"); 
+           CallableStatement cs = conn.prepareCall("{call dbo.updateMeal(?,?,?,?,?,?)}"); 
             cs.setInt(1, mealIdRow);
             cs.setString(2, mealDateRow);
             cs.setString(3, mealTypeRow);
@@ -158,7 +150,7 @@ public class MealsDb {
             JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku: "
                 +mealNameRow, "Zaktualizowano dane", JOptionPane.INFORMATION_MESSAGE);
         
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas zapisu danych " 
                 + exc.getMessage(), "Błąd zapisu", JOptionPane.ERROR_MESSAGE);
         }
