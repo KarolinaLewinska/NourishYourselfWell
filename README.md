@@ -1,7 +1,5 @@
 # NourishYourselfWell
-#### - Java Swing 
-#### - Bezpieczne procedury
-#### - MSSQL db <br/><br/>
+Application which lets add, edit, delete meals and activities data. It also present statistics (min, max, avg etc) 
 #### StartJFrame <br/>
 !["StartJFrame"](https://github.com/KarolinaLewinska/NourishYourselfWell/blob/master/UI%20screenshots/StartJFrame.PNG) <br/>
 #### MealsJFrame <br/>
