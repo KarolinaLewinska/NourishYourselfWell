@@ -23,7 +23,7 @@ public class ActivityJFrame extends javax.swing.JFrame {
         if (datePosition == (activities.size()-1)) 
             nextDate.setEnabled(false);
         
-        Activity activity = (Activity)activities.get(datePosition);
+        Activity activity = (Activity) activities.get(datePosition);
         activitySearchTF.setText(activity.getActivityDate().toString());
     }
     
