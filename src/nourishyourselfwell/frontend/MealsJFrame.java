@@ -22,7 +22,7 @@ public class MealsJFrame extends javax.swing.JFrame {
         if (datePosition == (meals.size()-1)) 
             nextDate.setEnabled(false);
          
-        Meal meal = (Meal)meals.get(datePosition);
+        Meal meal = (Meal) meals.get(datePosition);
         mealsSearchTF.setText(meal.getMealDate().toString());        
     }
     
