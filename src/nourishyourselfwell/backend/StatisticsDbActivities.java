@@ -12,7 +12,6 @@ public class StatisticsDbActivities {
     
     public ArrayList selectMostBurntCalories() {
         ArrayList<Activity> activities = new ArrayList();
-        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
@@ -35,7 +34,6 @@ public class StatisticsDbActivities {
     
     public ArrayList selectFavouriteActivity() {
         ArrayList<Activity> activities = new ArrayList();
-        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
@@ -57,7 +55,6 @@ public class StatisticsDbActivities {
     
     public ArrayList selectAverageBurntCalories() {
         ArrayList<Activity> activities = new ArrayList();
-        
          try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
