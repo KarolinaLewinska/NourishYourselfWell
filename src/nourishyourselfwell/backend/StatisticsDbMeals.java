@@ -14,8 +14,7 @@ public class StatisticsDbMeals {
         ArrayList<Meal> meals = new ArrayList();
          try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(
-            "jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
             PreparedStatement ps = conn.prepareStatement("{call dbo.mostCaloricMealStatistics}");
             ResultSet rs = ps.executeQuery();
