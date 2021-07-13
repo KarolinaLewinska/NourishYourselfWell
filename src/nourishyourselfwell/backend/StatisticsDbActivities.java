@@ -43,6 +43,7 @@ public class StatisticsDbActivities {
             
             while (rs.next()) 
                 activities.add(new Activity(rs.getString("activityType")));
+            
             conn.close();
             
         } catch (Exception exc) {
