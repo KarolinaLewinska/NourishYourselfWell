@@ -32,10 +32,10 @@ public class MealsDb {
             int columns = rs.getMetaData().getColumnCount();
             while (rs.next()) {  
                 Object[] row = new Object[columns];
+                
                 for (int i = 1; i <= columns; i++)
-                {  
                     row[i - 1] = rs.getObject(i);
-                }
+                
                 ((DefaultTableModel) mealsTable
                         .getModel()).insertRow(rs.getRow()-1,row);
             }
@@ -63,12 +63,14 @@ public class MealsDb {
             
             while (rs.next()) 
                 meals.add(new Meal(rs.getDate("mealDate")));
+            
             conn.close();
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Wystąpił błąd podczas wyświetlania dat spożytych posiłków " 
                 + e.getMessage(), "Błąd wyświetlania danych", JOptionPane.ERROR_MESSAGE);
         }
+        
         return meals;
     }
     
@@ -98,6 +100,7 @@ public class MealsDb {
     public void deleteMeal() {
         int selectedRow = mealsTable.getSelectedRow();
         int idRow = (int) mealsTable.getModel().getValueAt(selectedRow, 0);
+        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
@@ -105,6 +108,7 @@ public class MealsDb {
             CallableStatement cs = conn.prepareCall("{call dbo.deleteMeal(?)}"); 
             cs.setInt(1, idRow);
             cs.execute();
+           
             conn.close();
             
             JOptionPane.showMessageDialog(null, "Pomyślnie usunięto dane o posiłku" 
@@ -135,7 +139,7 @@ public class MealsDb {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=NourishYourselfWell", 
                     "nourishYourselfAdmin", "admin12"); 
-           CallableStatement cs = conn.prepareCall("{call dbo.updateMeal(?,?,?,?,?,?)}"); 
+            CallableStatement cs = conn.prepareCall("{call dbo.updateMeal(?,?,?,?,?,?)}"); 
             cs.setInt(1, mealIdRow);
             cs.setString(2, mealDateRow);
             cs.setString(3, mealTypeRow);
@@ -143,6 +147,7 @@ public class MealsDb {
             cs.setString(5, mealHourRow);
             cs.setString(6, mealCaloriesRow);
             cs.execute();
+            
             conn.close();
             
             JOptionPane.showMessageDialog(null, "Pomyślnie zaktualizowano dane o posiłku: "
