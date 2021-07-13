@@ -1,5 +1,5 @@
 # Nourish Yourself Well
-Application which lets add, edit, delete meals' and activities' data. It also presents statistics.
+Application which lets add, edit, delete meals' and activities' data. It also presents statistics
 - Java with Ant
 #### StartJFrame <br/>
 !["StartJFrame"](https://github.com/KarolinaLewinska/NourishYourselfWell/blob/master/UI%20screenshots/StartJFrame.PNG) <br/>
